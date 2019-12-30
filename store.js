@@ -17,7 +17,10 @@ const initialState = {
 const store = createContext(initialState);
 const { Provider } = store;
 
-// @todo handle next, previous too far in the past or future
+// @todo
+// - handle next, previous too far in the past or future
+// - handle announce
+
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     let newState = {};

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { yearMonthDay, getDates } from "./util";
+import { yearMonthDay, getDates, onKeydown } from "./util";
 import { Days } from "./Days";
 import { YearMonth } from "./YearMonth";
 import { DaysOfTheWeek } from "./DaysOfTheWeek";
@@ -18,6 +18,7 @@ export const Calendar = () => {
             id="Calendar-dates"
             aria-label="Calendar dates"
             role="application"
+            onKeyDown={onKeydown}
           >
             {weeks.map(week => {
               return (
