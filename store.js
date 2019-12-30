@@ -1,6 +1,12 @@
-// store.js
 import React, { createContext, useReducer } from "react";
-import { today, setSelected, getDates } from "./components/util";
+import {
+  today,
+  setSelected,
+  parseMonth,
+  parseYear,
+  yearMonthDay
+} from "./components/util";
+import dayjs from "dayjs";
 
 const initialState = {
   month: "02",
@@ -11,33 +17,50 @@ const initialState = {
 const store = createContext(initialState);
 const { Provider } = store;
 
+// @todo handle next, previous too far in the past or future
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
+    let newState = {};
     switch (action.type) {
       case "SELECT_DATE":
-        return {
+        newState = {
           ...state,
           selected: setSelected(state.selected, action.payload)
         };
+        break;
       case "SELECT_MONTH":
-        return {
+        newState = {
           ...state,
-          month: action.payload
+          date: (state.date = `${state.year}-${action.payload}-01`)
         };
+        break;
       case "SELECT_YEAR":
-        return {
+        newState = {
           ...state,
-          year: action.payload
+          date: (state.date = `${action.payload}-${state.month}-01`)
         };
-
+        break;
+      case "SELECT_NEXT":
+        newState = {
+          ...state,
+          date: yearMonthDay(dayjs(state.date).add(1, "month"))
+        };
+        break;
+      case "SELECT_PREVIOUS":
+        newState = {
+          ...state,
+          date: yearMonthDay(dayjs(state.date).subtract(1, "month"))
+        };
+        break;
       default:
-        return state;
+        newState = state;
     }
+
+    newState.month = parseMonth(newState.date);
+    newState.year = parseYear(newState.date);
+
+    return newState;
   }, initialState);
-
-  state.date = `${state.year}-${state.month}-01`;
-
-  console.log(state);
 
   return <Provider value={{ ...state, dispatch }}>{children}</Provider>;
 };

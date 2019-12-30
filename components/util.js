@@ -23,10 +23,6 @@ export const yearMonthDay = day => {
 };
 
 export const getDates = date => {
-
-  console.log("date",date)
-
-
   let start = dayjs(date)
     .startOf("month")
     .startOf("week")
@@ -68,4 +64,13 @@ export const setSelected = (arr, date) => {
 
 export const isSelected = (arr, date) => {
   return arr.findIndex(val => val === date);
+};
+
+export const parseMonth = date => {
+  return dayjs(date).format("MM");
+};
+
+export const parseYear = date => {
+  console.log(date);
+  return dayjs(date).format("YYYY");
 };

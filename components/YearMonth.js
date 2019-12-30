@@ -30,7 +30,13 @@ export const YearMonth = () => {
         id="previous"
         className="Calendar-nav--button"
         type="button"
-        aria-label="Previous month, October 2018"
+        aria-label=""
+        onClick={() => {
+          dispatch({
+            type: "SELECT_PREVIOUS",
+            payload: "previous"
+          });
+        }}
       >
         &#10094;
       </button>
@@ -54,7 +60,7 @@ export const YearMonth = () => {
           {
             <SelectMenu
               name="years"
-              selected="2020"
+              selected={year}
               values={years}
               handleChange={event => {
                 dispatch({
@@ -70,7 +76,13 @@ export const YearMonth = () => {
         id="next"
         className="Calendar-nav--button"
         type="button"
-        aria-label="Next month, December 2018"
+        aria-label=""
+        onClick={() => {
+          dispatch({
+            type: "SELECT_NEXT",
+            payload: "next"
+          });
+        }}
       >
         &#10095;
       </button>

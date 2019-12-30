@@ -6,7 +6,7 @@ export const SelectMenu = ({ name, values, selected, handleChange }) => {
       onChange={handleChange}
       id={name}
       aria-label={name}
-      defaultValue={selected}
+      value={selected}
     >
       {values.map(item => {
         return (
