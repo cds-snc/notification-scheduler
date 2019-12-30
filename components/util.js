@@ -11,7 +11,7 @@ export const isWeekend = day => {
 };
 
 export const formattedDay = day => {
-  return dayjs(day).format("D, dddd MMMM YYYY");
+  return dayjs(day).format("dddd MMMM YYYY");
 };
 
 export const isBlockedDay = (day, today = today) => {
@@ -19,8 +19,7 @@ export const isBlockedDay = (day, today = today) => {
 };
 
 export const yearMonthDay = day => {
-  const { $y: y, $M: m, $D: d } = day;
-  return `${y}-${m}-${d}`;
+  return dayjs(day).format("YYYY-MM-DD");
 };
 
 export const getDates = date => {
@@ -47,4 +46,22 @@ export const getDates = date => {
   }
 
   return calendar;
+};
+
+export const setSelected = (arr, date) => {
+  const index = isSelected(arr, date);
+
+  if (index !== -1) {
+    const cleaned = arr.filter(e => {
+      return e !== date;
+    });
+
+    return cleaned;
+  }
+
+  return [...arr, date];
+};
+
+export const isSelected = (arr, date) => {
+  return arr.findIndex(val => val === date);
 };

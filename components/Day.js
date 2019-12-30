@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import { isBlockedDay, formattedDay, yearMonthDay } from "./util";
+import { isBlockedDay, formattedDay, yearMonthDay, isSelected } from "./util";
 import { store } from "../store";
 
 export const Day = ({ day }) => {
-  const { today, dispatch } = useContext(store);
+  const { today, dispatch, selected } = useContext(store);
   const { $D: dayNum } = day;
   const isDisabled = isBlockedDay(day, today);
   const isCurrent = day.isSame(today);
-  const isSelected = day.isSame("");
+  const pressed = isSelected(selected, yearMonthDay(day));
   const bthState = isDisabled
     ? "Calendar-item--unavailable"
     : "Calendar-item--active";
@@ -19,7 +19,7 @@ export const Day = ({ day }) => {
     <button
       type="button"
       aria-label={label}
-      aria-pressed={isSelected}
+      aria-pressed={pressed === -1 ? false : true}
       className={["Calendar-item", bthState].join(" ")}
       data-timestamp={day.unix()}
       data-day={`day-${dayNum}`}
