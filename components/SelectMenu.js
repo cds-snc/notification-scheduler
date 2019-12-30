@@ -1,12 +1,17 @@
 import React from "react";
-export const SelectMenu = ({ name, values, selected }) => {
-  const vals = Object.entries(values);
+
+export const SelectMenu = ({ name, values, selected, handleChange }) => {
   return (
-    <select id={name} aria-label={name} defaultValue={selected}>
-      {vals.map(val => {
+    <select
+      onChange={handleChange}
+      id={name}
+      aria-label={name}
+      defaultValue={selected}
+    >
+      {values.map(item => {
         return (
-          <option key={val[1]} value={val[0]}>
-            {val[1]}
+          <option key={item.label} value={item.val}>
+            {item.label}
           </option>
         );
       })}

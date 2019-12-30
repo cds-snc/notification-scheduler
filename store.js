@@ -1,8 +1,13 @@
 // store.js
 import React, { createContext, useReducer } from "react";
-import { today, setSelected } from "./components/util";
+import { today, setSelected, getDates } from "./components/util";
 
-const initialState = { date: "2019-12-01", today, selected: ["2020-01-01"] };
+const initialState = {
+  month: "02",
+  year: "2020",
+  today,
+  selected: ["2020-01-01"]
+};
 const store = createContext(initialState);
 const { Provider } = store;
 
@@ -14,10 +19,25 @@ const StateProvider = ({ children }) => {
           ...state,
           selected: setSelected(state.selected, action.payload)
         };
+      case "SELECT_MONTH":
+        return {
+          ...state,
+          month: action.payload
+        };
+      case "SELECT_YEAR":
+        return {
+          ...state,
+          year: action.payload
+        };
+
       default:
         return state;
     }
   }, initialState);
+
+  state.date = `${state.year}-${state.month}-01`;
+
+  console.log(state);
 
   return <Provider value={{ ...state, dispatch }}>{children}</Provider>;
 };

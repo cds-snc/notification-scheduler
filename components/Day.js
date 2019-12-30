@@ -3,7 +3,7 @@ import { isBlockedDay, formattedDay, yearMonthDay, isSelected } from "./util";
 import { store } from "../store";
 
 export const Day = ({ day }) => {
-  const { today, dispatch, selected } = useContext(store);
+  const { today, selected, dispatch } = useContext(store);
   const { $D: dayNum } = day;
   const isDisabled = isBlockedDay(day, today);
   const isCurrent = day.isSame(today);

@@ -4,6 +4,10 @@
     --available-color: rgb(185, 218, 199);
 }
 
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .Calendar {
   border: 0.125rem solid #000;
   display: inline-block;
@@ -12,7 +16,7 @@
   position: relative;
   width: 100%;
   min-width: 18rem;
-  max-width: 25.5rem;
+  max-width: 24rem;
 }
 
 .Calendar-nav {

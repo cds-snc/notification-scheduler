@@ -23,6 +23,10 @@ export const yearMonthDay = day => {
 };
 
 export const getDates = date => {
+
+  console.log("date",date)
+
+
   let start = dayjs(date)
     .startOf("month")
     .startOf("week")

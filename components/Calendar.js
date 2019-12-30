@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { yearMonthDay, getDates } from "./util";
 import { Days } from "./Days";
 import { YearMonth } from "./YearMonth";
 import { DaysOfTheWeek } from "./DaysOfTheWeek";
-import { StateProvider } from "../store.js";
+import { store, StateProvider } from "../store.js";
 
 export const Calendar = () => {
-  const weeks = getDates();
+  const { date } = useContext(store);
+  const weeks = getDates(date);
   return (
     <div className="date-time">
       <section className="Calendar" aria-label="Calendar">
         <YearMonth />
-        <DaysOfTheWeek />
-
         <div className="Calendar-grid">
+          <DaysOfTheWeek />
           <section
             id="Calendar-dates"
             aria-label="Calendar dates"
