@@ -1,10 +1,17 @@
-import React, { useContext } from "react";
-import { isBlockedDay, formattedDay, yearMonthDay, isSelected } from "./util";
-import { store } from "../store";
+import React, { useContext, useRef, useEffect } from "react";
+import {
+  store,
+  isBlockedDay,
+  formattedDay,
+  yearMonthDay,
+  isSelected
+} from "./index";
 
 export const Day = ({ day }) => {
-  const { today, selected, dispatch } = useContext(store);
-  const { $D: dayNum } = day;
+  const { today, selected, focusedDayNum, dispatch } = useContext(store);
+  const { $D: dayNum = 0 } = day;
+  const { $D: todayDayNum = 0 } = today;
+  const tabIndex = dayNum !== todayDayNum ? { tabIndex: -1 } : {};
   const isDisabled = isBlockedDay(day, today);
   const isCurrent = day.isSame(today);
   const pressed = isSelected(selected, yearMonthDay(day));
@@ -12,11 +19,19 @@ export const Day = ({ day }) => {
     ? "Calendar-item--unavailable"
     : "Calendar-item--active";
   const currentState = isCurrent ? { "aria-current": "date" } : {};
-  const tabIndex = dayNum !== today.$D ? { tabIndex: -1 } : {};
-  const label = (isDisabled ? `Unavailable, ` : "") + formattedDay(day);
+  const labelDate = formattedDay(day);
+  const label = isDisabled ? `Unavailable, ${labelDate}` : labelDate;
+  const inputEl = useRef(null);
+
+  useEffect(() => {
+    if (dayNum === focusedDayNum) {
+      inputEl.current.focus();
+    }
+  }, []);
 
   return (
     <button
+      ref={inputEl}
       type="button"
       aria-label={label}
       aria-pressed={pressed === -1 ? false : true}

@@ -1,19 +1,21 @@
-import React, { createContext, useReducer } from "react";
-import {
-  today,
-  setSelected,
-  parseMonth,
-  parseYear,
-  yearMonthDay
-} from "./components/util";
 import dayjs from "dayjs";
+import React, { createContext, useReducer } from "react";
+import { setSelected, parseMonth, parseYear, yearMonthDay } from "./index";
+
+const today = dayjs()
+  .set("hour", 0)
+  .set("minute", 0)
+  .set("second", 0)
+  .set("millisecond", 0);
 
 const initialState = {
   month: "02",
   year: "2020",
+  date: "2020-02-01",
   today,
   selected: ["2020-01-01"]
 };
+
 const store = createContext(initialState);
 const { Provider } = store;
 
