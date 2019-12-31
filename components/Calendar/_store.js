@@ -1,6 +1,12 @@
 import dayjs from "dayjs";
 import React, { createContext, useReducer } from "react";
-import { setSelected, parseMonth, parseYear, yearMonthDay } from "./index";
+import {
+  setSelected,
+  parseDay,
+  parseMonth,
+  parseYear,
+  yearMonthDay
+} from "./index";
 
 const today = dayjs()
   .set("hour", 0)
@@ -13,7 +19,8 @@ const initialState = {
   year: "2020",
   date: "2020-02-01",
   today,
-  selected: ["2020-01-01"]
+  selected: ["2020-02-01"],
+  focusedDayNum: 20
 };
 
 const store = createContext(initialState);
@@ -55,6 +62,30 @@ const StateProvider = ({ children }) => {
         newState = {
           ...state,
           date: yearMonthDay(dayjs(state.date).subtract(1, "month"))
+        };
+        break;
+      case "KEY_UP":
+        newState = {
+          ...state,
+          focusedDayNum: state.focusedDayNum - 7
+        };
+        break;
+      case "KEY_DOWN":
+        newState = {
+          ...state,
+          focusedDayNum: state.focusedDayNum + 7
+        };
+        break;
+      case "KEY_RIGHT":
+        newState = {
+          ...state,
+          focusedDayNum: state.focusedDayNum + 1
+        };
+        break;
+      case "KEY_LEFT":
+        newState = {
+          ...state,
+          focusedDayNum: state.focusedDayNum - 1
         };
         break;
       default:

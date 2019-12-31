@@ -27,7 +27,7 @@ export const Day = ({ day }) => {
     if (dayNum === focusedDayNum) {
       inputEl.current.focus();
     }
-  }, []);
+  }, [focusedDayNum]);
 
   return (
     <button

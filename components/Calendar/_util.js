@@ -9,7 +9,7 @@ export const formattedDay = day => {
 };
 
 export const isBlockedDay = (day, today = today) => {
-  return false
+  return false;
   //return isWeekend(day) || day.isBefore(today);
 };
 
@@ -59,6 +59,10 @@ export const setSelected = (arr, date) => {
 
 export const isSelected = (arr, date) => {
   return arr.findIndex(val => val === date);
+};
+
+export const parseDay = date => {
+  return dayjs(date).format("D");
 };
 
 export const parseMonth = date => {
