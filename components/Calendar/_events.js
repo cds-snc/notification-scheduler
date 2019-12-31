@@ -1,4 +1,4 @@
-export const onKeyDown = ({ value, key, dispatch }) => {
+export const onKeyDown = ({ key, dispatch }) => {
   if (key.match(/Up|Down|Left|Right|Home|End|PageUp|PageDown/)) {
     switch (key) {
       case "Right":

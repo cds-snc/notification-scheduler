@@ -2,10 +2,12 @@ import dayjs from "dayjs";
 import React, { createContext, useReducer } from "react";
 import {
   setSelected,
-  parseDay,
   parseMonth,
   parseYear,
-  yearMonthDay
+  yearMonthDay,
+  getFirstDay,
+  getLastDay,
+  getNextDay
 } from "./index";
 
 const today = dayjs()
@@ -15,12 +17,12 @@ const today = dayjs()
   .set("millisecond", 0);
 
 const initialState = {
-  month: "02",
+  month: "01",
   year: "2020",
-  date: "2020-02-01",
+  date: "2020-01-01",
   today,
-  selected: ["2020-02-01"],
-  focusedDayNum: 20
+  selected: [],
+  focusedDayNum: 1
 };
 
 const store = createContext(initialState);
@@ -67,25 +69,25 @@ const StateProvider = ({ children }) => {
       case "KEY_UP":
         newState = {
           ...state,
-          focusedDayNum: state.focusedDayNum - 7
+          ...getNextDay(state.focusedDayNum - 7, state)
         };
         break;
       case "KEY_DOWN":
         newState = {
           ...state,
-          focusedDayNum: state.focusedDayNum + 7
+          ...getNextDay(state.focusedDayNum + 7, state)
         };
         break;
       case "KEY_RIGHT":
         newState = {
           ...state,
-          focusedDayNum: state.focusedDayNum + 1
+          ...getNextDay(state.focusedDayNum + 1, state)
         };
         break;
       case "KEY_LEFT":
         newState = {
           ...state,
-          focusedDayNum: state.focusedDayNum - 1
+          ...getNextDay(state.focusedDayNum - 1, state)
         };
         break;
       default:
@@ -94,6 +96,8 @@ const StateProvider = ({ children }) => {
 
     newState.month = parseMonth(newState.date);
     newState.year = parseYear(newState.date);
+    newState.firstDay = getFirstDay(newState.date);
+    newState.lastDay = getLastDay(newState.date);
 
     return newState;
   }, initialState);

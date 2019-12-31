@@ -9,8 +9,7 @@ export const formattedDay = day => {
 };
 
 export const isBlockedDay = (day, today = today) => {
-  return false;
-  //return isWeekend(day) || day.isBefore(today);
+  return isWeekend(day) || day.isBefore(today);
 };
 
 export const yearMonthDay = day => {
@@ -74,20 +73,38 @@ export const parseYear = date => {
   return dayjs(date).format("YYYY");
 };
 
-///// events
+export const getNextDay = (day, state) => {
+  if (day < state.firstDay) {
+    const newMonth = dayjs(state.date)
+      .subtract(1, "month")
+      .format("YYYY-MM-DD");
 
-const getFirstDate = () => {
-  return false;
+    console.log("previous month", getLastDay(newMonth));
+
+    return {
+      date: newMonth,
+      focusedDayNum: getLastDay(newMonth)
+    };
+  }
+
+  if (day > state.lastDay) {
+    const newMonth = dayjs(state.date)
+      .add(1, "month")
+      .format("YYYY-MM-DD");
+    return { date: newMonth, focusedDayNum: 1 };
+  }
+
+  return { focusedDayNum: day };
 };
 
-const nextMonth = () => {
-  return false;
+export const getFirstDay = date => {
+  return dayjs(date)
+    .startOf("month")
+    .format("D");
 };
 
-const previousMonth = () => {
-  return false;
-};
-
-const getLastDate = () => {
-  return false;
+export const getLastDay = date => {
+  return dayjs(date)
+    .endOf("month")
+    .format("D");
 };
