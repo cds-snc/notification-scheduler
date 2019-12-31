@@ -101,8 +101,6 @@ const StateProvider = ({ children }) => {
     newState.firstDay = getFirstDay(newState.date);
     newState.lastDay = getLastDay(newState.date);
 
-    console.log(newState);
-
     return newState;
   }, initialState);
 

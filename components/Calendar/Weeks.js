@@ -10,7 +10,6 @@ export const Weeks = () => {
       id="Calendar-dates"
       onKeyDown={event => {
         const key = event.key.replace("Arrow", "");
-        console.log("key", key);
         onKeyDown({ key, dispatch });
       }}
       aria-label="Calendar dates"

@@ -75,6 +75,8 @@ export const parseYear = date => {
 
 const pastFirstDayInMonth = (day, state) => {
   // first day of the month check
+  console.log("pastFirstDayInMonth");
+
   if (Number(state.focusedDayNum) === 1) {
     const newMonth = dayjs(state.date)
       .subtract(1, "month")
@@ -88,23 +90,38 @@ const pastFirstDayInMonth = (day, state) => {
 };
 
 const pastLastDayInMonth = (day, state) => {
-  const newMonth = dayjs(state.date)
-    .add(1, "month")
-    .format("YYYY-MM-DD");
-  return { date: newMonth, focusedDayNum: 1 };
+  console.log("pastLastDayInMonth");
+  if (Number(state.focusedDayNum) === Number(state.lastDay)) {
+    const newMonth = dayjs(state.date)
+      .add(1, "month")
+      .format("YYYY-MM-DD");
+    return { date: newMonth, focusedDayNum: 1 };
+  }
+
+  return {};
 };
 
 export const getNextDay = (day, state, direction) => {
+  console.log(
+    "day",
+    day,
+    "focused day num",
+    state.focusedDayNum,
+    "state last day",
+    state.lastDay,
+    "direction",
+    direction
+  );
+
   if (day <= 0) {
     return pastFirstDayInMonth(day, state);
   }
 
-  if (
-    direction != "left" &&
-    Number(state.focusedDayNum) === Number(state.lastDay)
-  ) {
+  if (direction != "left" && day > state.lastDay) {
     return pastLastDayInMonth(day, state);
   }
+
+  console.log("got here", day);
 
   return { focusedDayNum: day };
 };
