@@ -3,6 +3,7 @@ import React, { createContext, useReducer } from "react";
 import {
   setSelected,
   parseMonth,
+  parseDay,
   parseYear,
   yearMonthDay,
   getFirstDay,
@@ -39,7 +40,8 @@ const StateProvider = ({ children }) => {
       case "SELECT_DATE":
         newState = {
           ...state,
-          selected: setSelected(state.selected, action.payload)
+          selected: setSelected(state.selected, action.payload),
+          focusedDayNum: parseDay(action.payload)
         };
         break;
       case "SELECT_MONTH":
@@ -69,25 +71,25 @@ const StateProvider = ({ children }) => {
       case "KEY_UP":
         newState = {
           ...state,
-          ...getNextDay(state.focusedDayNum - 7, state)
+          ...getNextDay(Number(state.focusedDayNum) - 7, state, "up")
         };
         break;
       case "KEY_DOWN":
         newState = {
           ...state,
-          ...getNextDay(state.focusedDayNum + 7, state)
+          ...getNextDay(Number(state.focusedDayNum) + 7, state, "down")
         };
         break;
       case "KEY_RIGHT":
         newState = {
           ...state,
-          ...getNextDay(state.focusedDayNum + 1, state)
+          ...getNextDay(Number(state.focusedDayNum) + 1, state, "right")
         };
         break;
       case "KEY_LEFT":
         newState = {
           ...state,
-          ...getNextDay(state.focusedDayNum - 1, state)
+          ...getNextDay(Number(state.focusedDayNum) - 1, state, "left")
         };
         break;
       default:
@@ -98,6 +100,8 @@ const StateProvider = ({ children }) => {
     newState.year = parseYear(newState.date);
     newState.firstDay = getFirstDay(newState.date);
     newState.lastDay = getLastDay(newState.date);
+
+    console.log(newState);
 
     return newState;
   }, initialState);

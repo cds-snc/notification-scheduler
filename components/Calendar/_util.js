@@ -8,7 +8,7 @@ export const formattedDay = day => {
   return dayjs(day).format("dddd MMMM YYYY");
 };
 
-export const isBlockedDay = (day, today = today) => {
+export const isBlockedDay = (day, today) => {
   return isWeekend(day) || day.isBefore(today);
 };
 
@@ -21,7 +21,8 @@ export const getDates = date => {
     .startOf("month")
     .startOf("week")
     .subtract(1, "day");
-  const end = dayjs(date)
+
+  let end = dayjs(date)
     .endOf("month")
     .endOf("week")
     .subtract(1, "day");
@@ -69,29 +70,40 @@ export const parseMonth = date => {
 };
 
 export const parseYear = date => {
-  console.log(date);
   return dayjs(date).format("YYYY");
 };
 
-export const getNextDay = (day, state) => {
-  if (day < state.firstDay) {
+const pastFirstDayInMonth = (day, state) => {
+  // first day of the month check
+  if (Number(state.focusedDayNum) === 1) {
     const newMonth = dayjs(state.date)
       .subtract(1, "month")
       .format("YYYY-MM-DD");
-
-    console.log("previous month", getLastDay(newMonth));
-
     return {
       date: newMonth,
-      focusedDayNum: getLastDay(newMonth)
+      focusedDayNum: Number(getLastDay(newMonth))
     };
   }
+  return {};
+};
 
-  if (day > state.lastDay) {
-    const newMonth = dayjs(state.date)
-      .add(1, "month")
-      .format("YYYY-MM-DD");
-    return { date: newMonth, focusedDayNum: 1 };
+const pastLastDayInMonth = (day, state) => {
+  const newMonth = dayjs(state.date)
+    .add(1, "month")
+    .format("YYYY-MM-DD");
+  return { date: newMonth, focusedDayNum: 1 };
+};
+
+export const getNextDay = (day, state, direction) => {
+  if (day <= 0) {
+    return pastFirstDayInMonth(day, state);
+  }
+
+  if (
+    direction != "left" &&
+    Number(state.focusedDayNum) === Number(state.lastDay)
+  ) {
+    return pastLastDayInMonth(day, state);
   }
 
   return { focusedDayNum: day };

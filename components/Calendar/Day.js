@@ -24,7 +24,7 @@ export const Day = ({ day }) => {
   const inputEl = useRef(null);
 
   useEffect(() => {
-    if (dayNum === focusedDayNum) {
+    if (Number(dayNum) === Number(focusedDayNum)) {
       inputEl.current.focus();
     }
   }, [focusedDayNum]);
