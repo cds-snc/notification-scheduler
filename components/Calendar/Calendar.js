@@ -4,6 +4,10 @@ import { DaysOfTheWeek } from "./DaysOfTheWeek";
 import { Weeks } from "./Weeks";
 import { StateProvider } from "./index";
 
+// Note: 
+// Inspired by "A New Day: Making a Better Calendar"
+// https://www.24a11y.com/2018/a-new-day-making-a-better-calendar
+
 export const Calendar = () => {
   return (
     <div className="date-time">
