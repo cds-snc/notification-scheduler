@@ -2,9 +2,10 @@ import React from "react";
 import { YearMonth } from "./YearMonth";
 import { DaysOfTheWeek } from "./DaysOfTheWeek";
 import { Weeks } from "./Weeks";
+import { Announce } from "./Announce";
 import { StateProvider } from "./index";
 
-// Note: 
+// Note:
 // Inspired by "A New Day: Making a Better Calendar"
 // https://www.24a11y.com/2018/a-new-day-making-a-better-calendar
 
@@ -17,6 +18,7 @@ export const Calendar = () => {
           <DaysOfTheWeek />
           <Weeks />
         </div>
+        <Announce msg="" />
       </section>
     </div>
   );

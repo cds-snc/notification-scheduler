@@ -50,6 +50,10 @@ export const Day = ({ day }) => {
       }}
       onClick={() => {
         dispatch({ type: "SELECT_DATE", payload: yearMonthDay(day) });
+        dispatch({
+          type: "CALENDAR_UPDATES",
+          payload: `selected ${label}`
+        });
       }}
       {...currentState}
       {...tabIndex}

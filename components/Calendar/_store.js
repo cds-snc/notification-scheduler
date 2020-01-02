@@ -24,7 +24,8 @@ const initialState = {
   date: "2020-01-01",
   today,
   selected: [],
-  focusedDayNum: 1
+  focusedDayNum: 1,
+  updateMessage: "initial"
 };
 
 const store = createContext(initialState);
@@ -38,6 +39,9 @@ const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     let newState = {};
     switch (action.type) {
+      case "CALENDAR_UPDATES":
+        newState = { ...state, updateMessage: action.payload };
+        break;
       case "SELECT_DATE":
         if (isBlockedDay(dayjs(action.payload), state.today)) {
           newState = { ...state };
