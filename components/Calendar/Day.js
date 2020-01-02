@@ -15,13 +15,9 @@ export const Day = ({ day }) => {
   const isDisabled = isBlockedDay(day, today);
   const isCurrent = day.isSame(today);
   const pressed = isSelected(selected, yearMonthDay(day));
-
-  // console.log(pressed, "dayNum", dayNum);
-
   const bthState = isDisabled
     ? "Calendar-item--unavailable"
     : "Calendar-item--active";
-
   const currentState = isCurrent ? { "aria-current": "date" } : {};
   const labelDate = formattedDay(day);
   const label = isDisabled ? `Unavailable, ${labelDate}` : labelDate;

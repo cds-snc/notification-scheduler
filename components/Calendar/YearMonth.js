@@ -23,27 +23,25 @@ const months = [
   { val: "12", label: "December" }
 ];
 
-const prevNav = date => {
-  //
+const prevNav = (date, firstAvailableDate = "") => {
   const prevMonth = dayjs(date)
     .subtract(1, "month")
     .format("YYYY-MM-DD");
 
-  if (dayjs(prevMonth).isBefore(firstAvailableDate())) {
+  if (dayjs(prevMonth).isBefore(firstAvailableDate)) {
     return ["Calendar-nav--button--unavailable"];
   }
 
   return [];
 };
 
-const nextNav = (month, year) => {
-  // @todo make this dynamic
+const nextNav = (month, year, lastAvailableDate = "") => {
   const nextMonth = dayjs(`${year}-${month}-01`)
     .add(1, "month")
     .endOf("month")
     .format("YYYY-MM-DD");
 
-  if (dayjs(nextMonth).isAfter(lastAvailableDate())) {
+  if (dayjs(nextMonth).isAfter(lastAvailableDate)) {
     return ["Calendar-nav--button--unavailable"];
   }
 
@@ -51,13 +49,23 @@ const nextNav = (month, year) => {
 };
 
 export const YearMonth = () => {
-  const { month, year, dispatch, date } = useContext(store);
+  const {
+    month,
+    year,
+    dispatch,
+    date,
+    firstAvailableDate,
+    lastAvailableDate
+  } = useContext(store);
 
   return (
     <section aria-label="Calendar Navigation" className="Calendar-nav u-flex">
       <button
         id="previous"
-        className={["Calendar-nav--button", ...prevNav(date)].join(" ")}
+        className={[
+          "Calendar-nav--button",
+          ...prevNav(date, firstAvailableDate)
+        ].join(" ")}
         type="button"
         aria-label=""
         onClick={() => {
@@ -103,7 +111,10 @@ export const YearMonth = () => {
       </div>
       <button
         id="next"
-        className={["Calendar-nav--button", ...nextNav(month, year)].join(" ")}
+        className={[
+          "Calendar-nav--button",
+          ...nextNav(month, year, lastAvailableDate)
+        ].join(" ")}
         type="button"
         aria-label=""
         onClick={() => {

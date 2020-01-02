@@ -21,6 +21,8 @@ const today = dayjs()
 const initialState = {
   month: "01",
   year: "2020",
+  firstAvailableDate: "2020-01-01",
+  lastAvailableDate: "2021-12-31",
   date: "2020-01-01",
   today,
   selected: [],
@@ -33,7 +35,6 @@ const { Provider } = store;
 
 // @todo
 // - handle next, previous too far in the past or future
-// - handle announce
 
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
@@ -115,8 +116,6 @@ const StateProvider = ({ children }) => {
     newState.year = parseYear(newState.date);
     newState.firstDay = getFirstDay(newState.date);
     newState.lastDay = getLastDay(newState.date);
-
-    console.log(newState);
 
     return newState;
   }, initialState);
