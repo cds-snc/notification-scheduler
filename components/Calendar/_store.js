@@ -33,21 +33,13 @@ const { Provider } = store;
 // @todo
 // - handle next, previous too far in the past or future
 // - handle announce
-/*
-if (selection) {
-  selection.setAttribute('aria-pressed', 'false')
-  selection.setAttribute('tabindex', '-1')
-}
-
-date.setAttribute('aria-pressed', 'true')
-date.removeAttribute('tabindex')
-*/
 
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     let newState = {};
     switch (action.type) {
       case "SELECT_DATE":
+        console.log("select");
         if (isBlockedDay(dayjs(action.payload), state.today)) {
           newState = { ...state };
         } else {
@@ -87,6 +79,7 @@ const StateProvider = ({ children }) => {
           ...state,
           focusedDayNum: action.payload
         };
+        break;
       case "KEY_UP":
         newState = {
           ...state,
@@ -119,6 +112,8 @@ const StateProvider = ({ children }) => {
     newState.year = parseYear(newState.date);
     newState.firstDay = getFirstDay(newState.date);
     newState.lastDay = getLastDay(newState.date);
+
+    console.log(newState);
 
     return newState;
   }, initialState);
