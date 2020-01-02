@@ -37,7 +37,13 @@ export const Day = ({ day }) => {
       aria-pressed={pressed === -1 ? false : true}
       className={["Calendar-item", bthState].join(" ")}
       data-timestamp={day.unix()}
-      data-day={`day-${dayNum}`}
+      data-day={`${dayNum}`}
+      onFocus={event => {
+        const focused = event.currentTarget.dataset["day"];
+        if (Number(focusedDayNum) !== Number(focused)) {
+          dispatch({ type: "SELECT_DATE", payload: yearMonthDay(day) });
+        }
+      }}
       onClick={() => {
         dispatch({ type: "SELECT_DATE", payload: yearMonthDay(day) });
       }}

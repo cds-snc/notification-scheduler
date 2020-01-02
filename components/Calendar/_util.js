@@ -5,7 +5,7 @@ export const isWeekend = day => {
 };
 
 export const formattedDay = day => {
-  return dayjs(day).format("dddd MMMM YYYY");
+  return dayjs(day).format("dddd MMMM DD YYYY");
 };
 
 export const isBlockedDay = (day, today) => {
@@ -120,8 +120,6 @@ export const getNextDay = (day, state, direction) => {
   if (direction != "left" && day > state.lastDay) {
     return pastLastDayInMonth(day, state);
   }
-
-  console.log("got here", day);
 
   return { focusedDayNum: day };
 };

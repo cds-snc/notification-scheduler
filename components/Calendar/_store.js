@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import React, { createContext, useReducer } from "react";
 import {
+  isBlockedDay,
   setSelected,
   parseMonth,
   parseDay,
@@ -32,17 +33,30 @@ const { Provider } = store;
 // @todo
 // - handle next, previous too far in the past or future
 // - handle announce
+/*
+if (selection) {
+  selection.setAttribute('aria-pressed', 'false')
+  selection.setAttribute('tabindex', '-1')
+}
+
+date.setAttribute('aria-pressed', 'true')
+date.removeAttribute('tabindex')
+*/
 
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     let newState = {};
     switch (action.type) {
       case "SELECT_DATE":
-        newState = {
-          ...state,
-          selected: setSelected(state.selected, action.payload),
-          focusedDayNum: parseDay(action.payload)
-        };
+        if (isBlockedDay(dayjs(action.payload), state.today)) {
+          newState = { ...state };
+        } else {
+          newState = {
+            ...state,
+            selected: setSelected(state.selected, action.payload),
+            focusedDayNum: parseDay(action.payload)
+          };
+        }
         break;
       case "SELECT_MONTH":
         newState = {
@@ -68,6 +82,11 @@ const StateProvider = ({ children }) => {
           date: yearMonthDay(dayjs(state.date).subtract(1, "month"))
         };
         break;
+      case "FOCUS_DAY":
+        newState = {
+          ...state,
+          focusedDayNum: action.payload
+        };
       case "KEY_UP":
         newState = {
           ...state,
