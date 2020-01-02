@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { SelectMenu } from "./SelectMenu";
-import { store } from "./index";
+import { store, firstAvailableDate, lastAvailableDate } from "./index";
 import dayjs from "dayjs";
 
 const years = [
@@ -48,16 +48,6 @@ const nextNav = (month, year) => {
   }
 
   return [];
-};
-
-const firstAvailableDate = () => {
-  //@todo make this dynamic
-  return "2020-01-01";
-};
-
-const lastAvailableDate = day => {
-  //@todo make this dynamic
-  return "2021-12-31";
 };
 
 export const YearMonth = () => {
