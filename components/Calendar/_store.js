@@ -39,7 +39,6 @@ const StateProvider = ({ children }) => {
     let newState = {};
     switch (action.type) {
       case "SELECT_DATE":
-        console.log("select");
         if (isBlockedDay(dayjs(action.payload), state.today)) {
           newState = { ...state };
         } else {

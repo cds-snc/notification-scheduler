@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { SelectMenu } from "./SelectMenu";
 import { store } from "./index";
+import dayjs from "dayjs";
 
 const years = [
   { val: "2020", label: "2020" },
@@ -22,13 +23,51 @@ const months = [
   { val: "12", label: "December" }
 ];
 
+const prevNav = date => {
+  //
+  const prevMonth = dayjs(date)
+    .subtract(1, "month")
+    .format("YYYY-MM-DD");
+
+  if (dayjs(prevMonth).isBefore(firstAvailableDate())) {
+    return ["Calendar-nav--button--unavailable"];
+  }
+
+  return [];
+};
+
+const nextNav = (month, year) => {
+  // @todo make this dynamic
+  const nextMonth = dayjs(`${year}-${month}-01`)
+    .add(1, "month")
+    .endOf("month")
+    .format("YYYY-MM-DD");
+
+  if (dayjs(nextMonth).isAfter(lastAvailableDate())) {
+    return ["Calendar-nav--button--unavailable"];
+  }
+
+  return [];
+};
+
+const firstAvailableDate = () => {
+  //@todo make this dynamic
+  return "2020-01-01";
+};
+
+const lastAvailableDate = day => {
+  //@todo make this dynamic
+  return "2021-12-31";
+};
+
 export const YearMonth = () => {
-  const { month, year, dispatch } = useContext(store);
+  const { month, year, dispatch, date } = useContext(store);
+
   return (
     <section aria-label="Calendar Navigation" className="Calendar-nav u-flex">
       <button
         id="previous"
-        className="Calendar-nav--button"
+        className={["Calendar-nav--button", ...prevNav(date)].join(" ")}
         type="button"
         aria-label=""
         onClick={() => {
@@ -74,7 +113,7 @@ export const YearMonth = () => {
       </div>
       <button
         id="next"
-        className="Calendar-nav--button"
+        className={["Calendar-nav--button", ...nextNav(month, year)].join(" ")}
         type="button"
         aria-label=""
         onClick={() => {

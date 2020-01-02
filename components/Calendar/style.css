@@ -1,10 +1,10 @@
 :root {
-    --selected-color: rgb(0, 105, 47);
-    --hover-color: rgb(112, 180, 143);
-    --available-color: rgb(185, 218, 199);
+  --selected-color: rgb(0, 105, 47);
+  --hover-color: rgb(112, 180, 143);
+  --available-color: rgb(185, 218, 199);
 }
 
-body{
+body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -39,6 +39,16 @@ body{
   font-weight: bold;
   height: 2.75rem;
   width: 2.75rem;
+  border: 0;
+}
+
+.Calendar-nav--button--unavailable {
+  cursor: url("img/disableddates.ico") 20 20, not-allowed;
+  color: #000;
+  opacity: 0.2;
+  pointer-events: none;
+  background-color: white;
+  outline: none;
   border: 0;
 }
 
@@ -137,7 +147,7 @@ body{
 }
 
 .Calendar-item--unavailable {
-  cursor: url(img/disableddates.ico) 20 20, not-allowed;
+  cursor: url("img/disableddates.ico") 20 20, not-allowed;
   opacity: 0.5;
   pointer-events: none;
   background-color: white;
@@ -217,8 +227,4 @@ body{
 
 [aria-hidden="true"] {
   display: none;
-}
-
-.error-list + .date-time {
-  margin-top: 1rem;
 }
