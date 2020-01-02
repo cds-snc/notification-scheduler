@@ -3,7 +3,6 @@ import { SelectMenu } from "./SelectMenu";
 import { store } from "./index";
 
 const years = [
-  { val: "2019", label: "2019" },
   { val: "2020", label: "2020" },
   { val: "2021", label: "2021" }
 ];
