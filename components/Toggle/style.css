@@ -19,9 +19,11 @@
   width: 50px;
   height: 8px;
   background-color: #a5bfaf;
-  color: #cccccc;
+  color: #a5bfaf;
   -webkit-transition: all 0.6s;
   transition: all 0.6s;
+  outline: none;
+  border:none;
 }
 
 .switch.off,
@@ -31,16 +33,21 @@
   cursor: pointer;
 }
 
+.switch.off:focus.switch.off:before ,
+.switch.on:focus.switch.on:before{
+  box-shadow: 0 0 0 1pt #000;
+}
+
 .switch.off:before,
 .switch.off:after {
-  -webkit-transition: 0.6s;
-  transition: all 0.6s;
+  -webkit-transition: 0.3s;
+  transition: all 0.3s;
 }
 
 .switch.on:before,
 .switch.on:after {
-  -webkit-transition: 0.6s;
-  transition: all 0.6s;
+  -webkit-transition: 0.3s;
+  transition: all 0.3s;
 }
 
 .switch.off:before,
@@ -51,7 +58,7 @@
   height: 23px;
   width: 23px;
   left: 0px;
-  top: -2px;
+  top: -6px;
   background-color: #fff;
   border:1px solid #666666;
   -webkit-transition: 0.6s;
@@ -62,7 +69,7 @@
 }
 
 .switch.on:before {
-  -webkit-transform: translateX(38px);
-  -ms-transform: translateX(38px);
-  transform: translateX(38px);
+  -webkit-transform: translateX(32px);
+  -ms-transform: translateX(32px);
+  transform: translateX(32px);
 }
