@@ -107,22 +107,14 @@ const pastLastDayInMonth = (day, state) => {
   return {};
 };
 
-export const firstAvailableDate = () => {
-  //@todo make this dynamic
-  return "2020-01-01";
-};
-
-export const lastAvailableDate = day => {
-  //@todo make this dynamic
-  return "2021-12-31";
-};
-
-export const isBeforeFirstAvailableDate = () => {
+const isBeforeFirstAvailableDate = state => {
   return false;
+  //return dayjs(state.firstAvailableDate).isBefore()
 };
 
-export const isAfterFirstAvailableDate = () => {
+const isAfterFirstAvailableDate = state => {
   return false;
+  //return dayjs(state.firstAvailableDate).isAfter()
 };
 
 export const getNextDay = (day, state, direction) => {
@@ -139,7 +131,7 @@ export const getNextDay = (day, state, direction) => {
   );
   */
 
-  if (isBeforeFirstAvailableDate() || isAfterFirstAvailableDate()) {
+  if (isBeforeFirstAvailableDate(state) || isAfterFirstAvailableDate(state)) {
     return {};
   }
 

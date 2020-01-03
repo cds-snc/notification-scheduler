@@ -22,7 +22,7 @@ const firstDay = dayjs(today);
 const initialState = {
   today,
   firstAvailableDate: firstDay,
-  lastAvailableDate: dayjs(firstDay).add(1, "month"),
+  lastAvailableDate: dayjs(firstDay).add(3, "month"),
   month: dayjs(firstDay).format("MM"),
   year: dayjs(firstDay).format("YYYY"),
   date: yearMonthDay(firstDay),

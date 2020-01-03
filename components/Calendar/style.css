@@ -22,7 +22,7 @@
 }
 
 .Calendar-nav--button {
-  color: green;
+  color: var(--selected-color);
   font-size: 1.5rem;
   font-weight: bold;
   height: 2.75rem;
