@@ -25,7 +25,7 @@ export const populateTimes = (_24hr = false) => {
     let postfix = ampm ? ` ${ampm}` : "";
     let label = `${hours24}:${minutes}`;
 
-    if (!_24hr) {
+    if (_24hr === "off") {
       label = `${hours}:${minutes}${postfix}`;
     }
 

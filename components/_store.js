@@ -6,10 +6,10 @@ import {
   parseMonth,
   parseDay,
   parseYear,
-  yearMonthDay,
   getFirstDay,
   getLastDay,
-  getNextDay
+  getNextDay,
+  yearMonthDay
 } from "./Calendar/index";
 
 const today = dayjs()
@@ -25,10 +25,10 @@ const initialState = {
   lastAvailableDate: "2021-12-31",
   date: "2020-01-01",
   today,
-  selected: [],
+  selected: [yearMonthDay(today)],
   focusedDayNum: 1,
   updateMessage: "initial",
-  _24hr: true
+  _24hr: "off"
 };
 
 const store = createContext(initialState);
@@ -41,6 +41,9 @@ const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     let newState = {};
     switch (action.type) {
+      case "AM_PM":
+        newState = { ...state, _24hr: action.payload === "off" ? "on" : "off" };
+        break;
       case "CALENDAR_UPDATES":
         newState = { ...state, updateMessage: action.payload };
         break;

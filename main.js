@@ -2,6 +2,7 @@ import ReactDOM from "react-dom";
 import React from "react";
 import { StateProvider } from "./components/_store";
 import { Calendar } from "./components/Calendar/Calendar";
+import { Date } from "./components/Date/Date";
 import { Toggle } from "./components/Toggle/Toggle";
 import { Time } from "./components/Time/Time";
 
@@ -13,8 +14,14 @@ export const App = () => {
           <Calendar />
         </div>
         <div className="column">
-          <Time name="time" />
-          <Toggle />
+          <div className="selected-date-time-box">
+            <div className="triangle"></div>
+            <div className="date-time-box">
+              <Date />
+              <Time name="time" />
+              <Toggle />
+            </div>
+          </div>
         </div>
       </div>
     </StateProvider>

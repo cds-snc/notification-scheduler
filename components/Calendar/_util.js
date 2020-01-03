@@ -43,9 +43,10 @@ export const getDates = date => {
   return calendar;
 };
 
-export const setSelected = (arr, date) => {
+export const setSelected = (arr, date, multi = false) => {
   const index = isSelected(arr, date);
 
+  // toggle this value if it's already been set
   if (index !== -1) {
     const cleaned = arr.filter(e => {
       return e !== date;
@@ -54,7 +55,11 @@ export const setSelected = (arr, date) => {
     return cleaned;
   }
 
-  return [...arr, date];
+  if (multi) {
+    return [...arr, date];
+  }
+
+  return [date];
 };
 
 export const isSelected = (arr, date) => {

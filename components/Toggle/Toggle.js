@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { store } from "./index";
 
-export const Toggle = props => {
-  const [toggleState, setToggleState] = useState("off");
-
-  function toggle() {
-    setToggleState(toggleState === "off" ? "on" : "off");
-  }
-
+export const Toggle = () => {
+  const { _24hr, dispatch } = useContext(store);
   return (
     <div className="toggle-holder">
       <div className="toggle-label">am/pm</div>
-      <div className={`switch ${toggleState}`} onClick={toggle} />
+      <div
+        className={`switch ${_24hr}`}
+        onClick={() => {
+          dispatch({ type: "AM_PM", payload: _24hr });
+        }}
+      />
       <div className="toggle-label">24h</div>
     </div>
   );

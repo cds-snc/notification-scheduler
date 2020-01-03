@@ -7,7 +7,10 @@
 .toggle-label {
   padding: 0.8rem;
   color:#000;
-  opacity: 0.8;
+}
+
+.toggle-label:first-child{
+  padding-left: 0;
 }
 
 .switch {
@@ -15,7 +18,7 @@
   display: inline-block;
   width: 50px;
   height: 8px;
-  background-color: #cccccc;
+  background-color: #a5bfaf;
   color: #cccccc;
   -webkit-transition: all 0.6s;
   transition: all 0.6s;
