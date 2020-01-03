@@ -1,7 +1,7 @@
 :root {
-  --selected-color: rgb(0, 105, 47);
-  --hover-color: rgb(112, 180, 143);
-  --available-color: rgb(185, 218, 199);
+  --selected-color: #005da5;
+  --hover-color:rgba(43,139,196,0.5);
+  --available-color: #d5e8f3;
 }
 
 body {

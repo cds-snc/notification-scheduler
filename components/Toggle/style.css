@@ -9,6 +9,10 @@
   color:#000;
 }
 
+.toggle-label-active{
+  font-weight: bold;
+}
+
 .toggle-label:first-child{
   padding-left: 0;
 }
@@ -18,7 +22,7 @@
   display: inline-block;
   width: 50px;
   height: 8px;
-  background-color: #a5bfaf;
+  background-color: var(--selected-color);
   color: #a5bfaf;
   -webkit-transition: all 0.6s;
   transition: all 0.6s;
