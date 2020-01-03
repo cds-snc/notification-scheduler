@@ -3,7 +3,6 @@ import { YearMonth } from "./YearMonth";
 import { DaysOfTheWeek } from "./DaysOfTheWeek";
 import { Weeks } from "./Weeks";
 import { Announce } from "./Announce";
-import { StateProvider } from "./index";
 
 // Note:
 // Inspired by "A New Day: Making a Better Calendar"
@@ -21,13 +20,5 @@ export const Calendar = () => {
         <Announce msg="" />
       </section>
     </div>
-  );
-};
-
-export const CalendarWrapper = () => {
-  return (
-    <StateProvider>
-      <Calendar />
-    </StateProvider>
   );
 };

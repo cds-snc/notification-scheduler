@@ -1,17 +1,7 @@
-:root {
-  --selected-color: rgb(0, 105, 47);
-  --hover-color: rgb(112, 180, 143);
-  --available-color: rgb(185, 218, 199);
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 .Calendar {
   border: 0.125rem solid #000;
   display: inline-block;
-  min-height: 25.125rem;
+  min-height: 24rem;
   padding: 0.625rem;
   position: relative;
   width: 100%;
@@ -24,9 +14,7 @@ body {
   padding: 0.125rem;
 }
 
-.Calendar-nav--button,
-.Calendar-nav--select,
-.Calendar-help-close {
+.Calendar-nav--button {
   background-color: #fff;
   border: 0.063rem solid currentColor;
   cursor: pointer;
@@ -56,54 +44,9 @@ body {
   margin-right: 0;
 }
 
-.Calendar-nav--selects {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-}
-
-.Calendar-nav--select {
-  height: 2.75rem;
-  position: relative;
-  width: 100%;
-}
-
-.Calendar-nav--select::after {
-  border-top: 0.063rem solid black;
-  border-right: 0.063rem solid black;
-  border-width: 0.188rem;
-  content: "";
-  display: block;
-  height: 0.625rem;
-  position: absolute;
-  right: 0.5rem;
-  top: 50%;
-  -webkit-transform: rotate(135deg);
-  -moz-transform: rotate(135deg);
-  -ms-transform: rotate(135deg);
-  transform: translateY(-50%) rotate(135deg);
-  width: 0.625rem;
-}
-
-.Calendar-nav--select select {
-  -webkit-appearance: none;
-  background-image: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  height: 2.75rem;
-  padding: 0 0.5rem;
-  width: 100%;
-}
-
 .Calendar-nav--button:focus,
-.Calendar-nav--select select:focus,
 .Calendar-item:hover:not(.Calendar-item--day):not(.Calendar-item--unavailable):not(:empty),
-.Calendar-item:focus:not(.Calendar-item--day):not(.Calendar-item--unavailable):not(:empty),
-.Calendar-help-trigger:focus,
-.Calendar-help-dialog:focus,
-.Calendar-help-close:focus {
+.Calendar-item:focus:not(.Calendar-item--day):not(.Calendar-item--unavailable):not(:empty) {
   outline: black inset;
   outline-offset: -4px;
   outline-offset: -4px;
@@ -170,33 +113,7 @@ body {
   background-color: white;
 }
 
-.Calendar-nav--select select:focus {
-  outline: block inset;
-  outline-offset: -2px;
-  outline-offset: -2px;
-}
-
-.Calendar-help {
-  position: relative;
-}
-
-.Calendar-help-dialog {
-  background-color: #fff;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  left: 0;
-  padding: 1rem;
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 1;
-  font-size: 0.9rem;
-}
-
-.visually-hidden,
-.Calendar-help-trigger {
+.visually-hidden{
   background-color: #005493;
   clip: rect(0.063rem, 0.063rem, 0.063rem, 0.063rem);
   color: #fff;
@@ -207,22 +124,6 @@ body {
   top: 0.5rem;
   white-space: nowrap;
   width: 0.5px;
-}
-
-.Calendar-help-trigger:focus {
-  clip: initial;
-  font-size: inherit;
-  height: auto;
-  left: 50%;
-  overflow: visible;
-  transform: translateX(-50%);
-  width: auto;
-  z-index: 1;
-}
-
-.Calendar-help-close {
-  color: #000;
-  font-size: 1rem;
 }
 
 [aria-hidden="true"] {

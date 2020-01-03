@@ -77,8 +77,8 @@ export const YearMonth = () => {
       >
         &#10094;
       </button>
-      <div className="Calendar-nav--selects">
-        <div className="Calendar-nav--select">
+      <div className="Nav--selects">
+        <div className="Nav--select">
           {
             <SelectMenu
               name="months"
@@ -93,7 +93,7 @@ export const YearMonth = () => {
             />
           }
         </div>
-        <div className="Calendar-nav--select">
+        <div className="Nav--select">
           {
             <SelectMenu
               name="years"

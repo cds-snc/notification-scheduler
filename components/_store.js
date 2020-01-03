@@ -10,7 +10,7 @@ import {
   getFirstDay,
   getLastDay,
   getNextDay
-} from "./index";
+} from "./Calendar/index";
 
 const today = dayjs()
   .set("hour", 0)
@@ -27,7 +27,8 @@ const initialState = {
   today,
   selected: [],
   focusedDayNum: 1,
-  updateMessage: "initial"
+  updateMessage: "initial",
+  _24hr: true
 };
 
 const store = createContext(initialState);

@@ -1,20 +1,23 @@
 import ReactDOM from "react-dom";
 import React from "react";
-import { CalendarWrapper } from "./components/Calendar/Calendar";
+import { StateProvider } from "./components/_store";
+import { Calendar } from "./components/Calendar/Calendar";
 import { Toggle } from "./components/Toggle/Toggle";
 import { Time } from "./components/Time/Time";
 
 export const App = () => {
   return (
-    <div className="schedule">
-      <div>
-        <CalendarWrapper />
+    <StateProvider>
+      <div className="schedule">
+        <div>
+          <Calendar />
+        </div>
+        <div className="column">
+          <Time name="time" />
+          <Toggle />
+        </div>
       </div>
-      <div className="column">
-        <Toggle />
-        <Time name="time" />
-      </div>
-    </div>
+    </StateProvider>
   );
 };
 
