@@ -15,6 +15,7 @@ export const Toggle = () => {
       </div>
       <button
         className={`switch ${_24hr}`}
+        aria-label="AM PM 24hr time toggle"
         onClick={() => {
           dispatch({ type: "AM_PM", payload: _24hr });
         }}

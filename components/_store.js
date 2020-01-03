@@ -42,7 +42,14 @@ const StateProvider = ({ children }) => {
     let newState = {};
     switch (action.type) {
       case "AM_PM":
-        newState = { ...state, _24hr: action.payload === "off" ? "on" : "off" };
+        newState = {
+          ...state,
+          _24hr: action.payload === "off" ? "on" : "off",
+          updateMessage:
+            action.payload === "off"
+              ? "AM PM time selected"
+              : "24 hr time selected"
+        };
         break;
       case "CALENDAR_UPDATES":
         newState = { ...state, updateMessage: action.payload };
