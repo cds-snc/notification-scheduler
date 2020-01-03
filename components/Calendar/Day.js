@@ -9,10 +9,11 @@ import {
 
 export const Day = ({ day }) => {
   const { today, selected, focusedDayNum, dispatch } = useContext(store);
+  const currentStoreState = useContext(store);
   const { $D: dayNum = 0 } = day;
   const { $D: todayDayNum = 0 } = today;
   const tabIndex = dayNum !== todayDayNum ? { tabIndex: -1 } : {};
-  const isDisabled = isBlockedDay(day, today);
+  const isDisabled = isBlockedDay(day, useContext(store));
   const isCurrent = day.isSame(today);
   const pressed = isSelected(selected, yearMonthDay(day));
   const bthState = isDisabled

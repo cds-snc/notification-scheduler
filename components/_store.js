@@ -18,16 +18,17 @@ const today = dayjs()
   .set("second", 0)
   .set("millisecond", 0);
 
+const firstDay = dayjs(today);
 const initialState = {
-  month: "01",
-  year: "2020",
-  firstAvailableDate: "2020-01-01",
-  lastAvailableDate: "2021-12-31",
-  date: "2020-01-01",
   today,
-  selected: [yearMonthDay(today)],
-  focusedDayNum: 1,
-  updateMessage: "initial",
+  firstAvailableDate: firstDay,
+  lastAvailableDate: dayjs(firstDay).add(1, "month"),
+  month: dayjs(firstDay).format("MM"),
+  year: dayjs(firstDay).format("YYYY"),
+  date: yearMonthDay(firstDay),
+  selected: [yearMonthDay(firstDay)],
+  focusedDayNum: dayjs(firstDay).format("D"),
+  updateMessage: "",
   _24hr: "off"
 };
 
@@ -55,7 +56,7 @@ const StateProvider = ({ children }) => {
         newState = { ...state, updateMessage: action.payload };
         break;
       case "SELECT_DATE":
-        if (isBlockedDay(dayjs(action.payload), state.today)) {
+        if (isBlockedDay(dayjs(action.payload), state)) {
           newState = { ...state };
         } else {
           newState = {
