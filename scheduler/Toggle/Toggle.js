@@ -22,6 +22,7 @@ export const Toggle = () => {
       </div>
       <button
         className={`switch ${_24hr}`}
+        type="button"
         aria-label="AM PM 24hr time toggle"
         onFocus={() => {
           setActive(true);
