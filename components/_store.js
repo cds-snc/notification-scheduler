@@ -47,8 +47,8 @@ const StateProvider = ({ children }) => {
           _24hr: action.payload === "off" ? "on" : "off",
           updateMessage:
             action.payload === "off"
-              ? "AM PM time selected"
-              : "24 hr time selected"
+              ? "24 hr time selected"
+              : "AM PM time selected "
         };
         break;
       case "CALENDAR_UPDATES":
@@ -113,7 +113,6 @@ const StateProvider = ({ children }) => {
 
     newState.firstDay = getFirstDay(newState.date);
     newState.lastDay = getLastDay(newState.date);
-    console.log(newState);
 
     return newState;
   }, initialState);

@@ -10,7 +10,6 @@ export const formattedDay = day => {
 
 export const isBlockedDay = (day, state) => {
   return (
-    isWeekend(day) ||
     day.isBefore(state.today) ||
     day.isBefore(state.firstAvailableDate) ||
     dayjs(day).isAfter(state.lastAvailableDate)
