@@ -1,11 +1,18 @@
 import React, { useState, useContext } from "react";
-import { store } from "./index";
-import { populateTimes } from "./_util";
+import { store, populateTimes, dateIsToday } from "./index";
 
 export const Time = ({ name }) => {
-  const { _24hr } = useContext(store);
-  const values = populateTimes(_24hr);
-  const [selected, setSelected] = useState("10:00");
+  const { _24hr, today, selected: selectedDate } = useContext(store);
+
+  let startTime = 0;
+
+  if (dateIsToday(today, selectedDate[0])) {
+    const d = new Date();
+    startTime = Number(d.getHours() + 1) * 60;
+  }
+
+  const values = populateTimes(_24hr, startTime);
+  const [selected, setSelected] = useState("09:00");
   return (
     <div className="Nav--select">
       <select

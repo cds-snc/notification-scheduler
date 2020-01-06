@@ -1,8 +1,10 @@
-export const populateTimes = (_24hr = false) => {
+import dayjs from "dayjs";
+
+export const populateTimes = (_24hr = false, startTime = 0) => {
   let hours, hours24, minutes, ampm;
   let arr = [];
 
-  for (let i = 0; i <= 1380; i += 60) {
+  for (let i = startTime; i <= 1380; i += 60) {
     hours = Math.floor(i / 60);
     hours24 = Math.floor(i / 60);
 
@@ -33,4 +35,8 @@ export const populateTimes = (_24hr = false) => {
   }
 
   return arr;
+};
+
+export const dateIsToday = (today, date) => {
+  return dayjs(today).isSame(dayjs(date));
 };
