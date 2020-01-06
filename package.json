@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html",
+    "build": "parcel build index.html --no-source-maps",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dayjs": "^1.8.18",
+    "dayjs": "^1.8.19",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
