@@ -40,7 +40,7 @@ export const YearMonth = () => {
           ...prevNav(date, firstAvailableDate)
         ].join(" ")}
         type="button"
-        aria-label=""
+        aria-label="Previous month"
         onClick={() => {
           dispatch({
             type: "SELECT_PREVIOUS",
@@ -58,7 +58,7 @@ export const YearMonth = () => {
           ...nextNav(date, lastAvailableDate)
         ].join(" ")}
         type="button"
-        aria-label=""
+        aria-label="Next month"
         onClick={() => {
           dispatch({
             type: "SELECT_NEXT",
