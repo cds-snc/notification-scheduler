@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { store, populateTimes, dateIsToday } from "./index";
+import "./style.css";
 
 export const Time = ({ name }) => {
   const { _24hr, today, selected: selectedDate } = useContext(store);

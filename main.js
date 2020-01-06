@@ -5,6 +5,7 @@ import { Calendar } from "./components/Calendar/Calendar";
 import { Date } from "./components/Date/Date";
 import { Toggle } from "./components/Toggle/Toggle";
 import { Time } from "./components/Time/Time";
+import "./style.css";
 
 export const App = () => {
   return (

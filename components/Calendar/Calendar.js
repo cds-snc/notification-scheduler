@@ -3,6 +3,7 @@ import { YearMonth } from "./YearMonth";
 import { DaysOfTheWeek } from "./DaysOfTheWeek";
 import { Weeks } from "./Weeks";
 import { Announce } from "./Announce";
+import "./style.css";
 
 // Note:
 // Inspired by "A New Day: Making a Better Calendar"
