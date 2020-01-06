@@ -3,9 +3,7 @@ import React, { createContext, useReducer } from "react";
 import {
   isBlockedDay,
   setSelected,
-  parseMonth,
   parseDay,
-  parseYear,
   getFirstDay,
   getLastDay,
   getNextDay,
@@ -19,12 +17,11 @@ const today = dayjs()
   .set("millisecond", 0);
 
 const firstDay = dayjs(today);
+
 const initialState = {
   today,
   firstAvailableDate: firstDay,
-  lastAvailableDate: dayjs(firstDay).add(3, "month"),
-  month: dayjs(firstDay).format("MM"),
-  year: dayjs(firstDay).format("YYYY"),
+  lastAvailableDate: dayjs(firstDay).add(1, "month"),
   date: yearMonthDay(firstDay),
   selected: [yearMonthDay(firstDay)],
   focusedDayNum: dayjs(firstDay).format("D"),
@@ -124,8 +121,6 @@ const StateProvider = ({ children }) => {
         newState = state;
     }
 
-    newState.month = parseMonth(newState.date);
-    newState.year = parseYear(newState.date);
     newState.firstDay = getFirstDay(newState.date);
     newState.lastDay = getLastDay(newState.date);
 

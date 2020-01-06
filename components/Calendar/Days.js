@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
+import dayjs from "dayjs";
 import { Day } from "./Day";
 import { store, yearMonthDay } from "./index";
 
 export const Days = ({ week }) => {
-  const { month } = useContext(store);
+  const { date } = useContext(store);
+  const month = dayjs(date).format("MM");
   return week.map(day => {
     if (Number(day.$M) + 1 !== Number(month)) {
       return (
