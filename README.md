@@ -1,4 +1,4 @@
-# notification-scheduler
+# Notification Scheduler
 
 
 ## Setup with [Notify](https://github.com/cds-snc/notification-admin)
@@ -6,7 +6,9 @@
 - Copy the scheduler directory to the admin repository
   app > assets > javascript > scheduler (overwrite the existing files)
 
-- In the admin repository
+## Compile & Running
+
+In the admin repository
 
 Compile using Webpack
 
