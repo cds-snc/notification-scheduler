@@ -1,10 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { store } from "./index";
 
 export const Toggle = () => {
   const { _24hr, dispatch } = useContext(store);
+  const [active, setActive] = useState(false);
+
   return (
-    <div className="toggle-holder">
+    <div
+      className={
+        active ? "toggle-holder toggle-holder-active" : "toggle-holder"
+      }
+    >
       <div
         className={[
           "toggle-label",
@@ -16,6 +22,12 @@ export const Toggle = () => {
       <button
         className={`switch ${_24hr}`}
         aria-label="AM PM 24hr time toggle"
+        onFocus={() => {
+          setActive(true);
+        }}
+        onBlur={() => {
+          setActive(false);
+        }}
         onClick={() => {
           dispatch({ type: "AM_PM", payload: _24hr });
         }}

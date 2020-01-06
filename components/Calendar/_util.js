@@ -88,12 +88,18 @@ const pastFirstDayInMonth = (day, state) => {
     const newMonth = dayjs(state.date)
       .subtract(1, "month")
       .format("YYYY-MM-DD");
+
+    if (dayjs(newMonth).isBefore(yearMonthDay(state.firstAvailableDate))) {
+      return { updateMessage: "At start of calendar" };
+    }
+
     return {
+      updateMessage: "",
       date: newMonth,
       focusedDayNum: Number(getLastDay(newMonth))
     };
   }
-  return {};
+  return { updateMessage: "" };
 };
 
 const pastLastDayInMonth = (day, state) => {
@@ -101,20 +107,15 @@ const pastLastDayInMonth = (day, state) => {
     const newMonth = dayjs(state.date)
       .add(1, "month")
       .format("YYYY-MM-DD");
-    return { date: newMonth, focusedDayNum: 1 };
+
+    if (dayjs(newMonth).isAfter(yearMonthDay(state.lastAvailableDate))) {
+      return { updateMessage: "At end of calendar" };
+    }
+
+    return { updateMessage: "", date: newMonth, focusedDayNum: 1 };
   }
 
-  return {};
-};
-
-const isBeforeFirstAvailableDate = state => {
-  return false;
-  //return dayjs(state.firstAvailableDate).isBefore()
-};
-
-const isAfterFirstAvailableDate = state => {
-  return false;
-  //return dayjs(state.firstAvailableDate).isAfter()
+  return { updateMessage: "" };
 };
 
 export const getNextDay = (day, state, direction) => {
@@ -131,10 +132,6 @@ export const getNextDay = (day, state, direction) => {
   );
   */
 
-  if (isBeforeFirstAvailableDate(state) || isAfterFirstAvailableDate(state)) {
-    return {};
-  }
-
   if (day <= 0) {
     return pastFirstDayInMonth(day, state);
   }
@@ -143,7 +140,7 @@ export const getNextDay = (day, state, direction) => {
     return pastLastDayInMonth(day, state);
   }
 
-  return { focusedDayNum: day };
+  return { updateMessage: "", focusedDayNum: day };
 };
 
 export const getFirstDay = date => {

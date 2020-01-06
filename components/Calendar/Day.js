@@ -9,13 +9,13 @@ import {
 
 export const Day = ({ day }) => {
   const { today, selected, focusedDayNum, dispatch } = useContext(store);
-  const currentStoreState = useContext(store);
   const { $D: dayNum = 0 } = day;
   const { $D: todayDayNum = 0 } = today;
   const tabIndex = dayNum !== todayDayNum ? { tabIndex: -1 } : {};
   const isDisabled = isBlockedDay(day, useContext(store));
   const isCurrent = day.isSame(today);
-  const pressed = isSelected(selected, yearMonthDay(day));
+  const formattedDate = yearMonthDay(day);
+  const pressed = isSelected(selected, formattedDate);
   const bthState = isDisabled
     ? "Calendar-item--unavailable"
     : "Calendar-item--active";
@@ -39,10 +39,12 @@ export const Day = ({ day }) => {
       className={["Calendar-item", bthState].join(" ")}
       data-timestamp={day.unix()}
       data-day={`${dayNum}`}
+      data-date={formattedDate}
       onFocus={event => {
         const focused = event.currentTarget.dataset["day"];
+        const date = event.currentTarget.dataset["date"];
         if (Number(focusedDayNum) !== Number(focused)) {
-          dispatch({ type: "FOCUS_DAY", payload: focused });
+          dispatch({ type: "FOCUS_DAY", payload: { focused, date } });
         }
       }}
       onClick={() => {

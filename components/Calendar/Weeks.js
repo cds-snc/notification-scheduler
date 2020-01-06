@@ -4,6 +4,7 @@ import { Days } from "./Days";
 
 export const Weeks = () => {
   const { date, dispatch } = useContext(store);
+
   const weeks = getDates(date);
   return (
     <section

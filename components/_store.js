@@ -7,7 +7,9 @@ import {
   getFirstDay,
   getLastDay,
   getNextDay,
-  yearMonthDay
+  yearMonthDay,
+  atCalendarStart,
+  atCalendarEnd
 } from "./Calendar/index";
 
 const today = dayjs()
@@ -63,18 +65,6 @@ const StateProvider = ({ children }) => {
           };
         }
         break;
-      case "SELECT_MONTH":
-        newState = {
-          ...state,
-          date: (state.date = `${state.year}-${action.payload}-01`)
-        };
-        break;
-      case "SELECT_YEAR":
-        newState = {
-          ...state,
-          date: (state.date = `${action.payload}-${state.month}-01`)
-        };
-        break;
       case "SELECT_NEXT":
         newState = {
           ...state,
@@ -90,7 +80,7 @@ const StateProvider = ({ children }) => {
       case "FOCUS_DAY":
         newState = {
           ...state,
-          focusedDayNum: action.payload
+          focusedDayNum: action.payload.focused
         };
         break;
       case "KEY_UP":
@@ -123,6 +113,7 @@ const StateProvider = ({ children }) => {
 
     newState.firstDay = getFirstDay(newState.date);
     newState.lastDay = getLastDay(newState.date);
+    console.log(newState);
 
     return newState;
   }, initialState);

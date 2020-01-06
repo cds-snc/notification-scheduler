@@ -13,15 +13,6 @@ export const onKeyDown = ({ key, dispatch }) => {
       case "Down":
         dispatch({ type: "KEY_DOWN", payload: "" });
         break;
-      case "Home":
-        //next = getFirstDate();
-        break;
-      case "End":
-        // next = getLastDate();
-        break;
-      case "PageUp":
-      case "PageDown":
-        break;
       default:
     }
   }
