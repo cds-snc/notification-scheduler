@@ -1,4 +1,4 @@
-# notification-scheduler
+# Notification Scheduler
 
 
 ## Setup with [Notify](https://github.com/cds-snc/notification-admin)
