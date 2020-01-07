@@ -1,2 +1,2 @@
-export { store, StateProvider } from "../_store";
+export { store, StateProvider } from "../store";
 export * from "./_util";

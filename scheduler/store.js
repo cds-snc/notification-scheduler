@@ -1,5 +1,6 @@
-import dayjs from "dayjs";
 import React, { createContext, useReducer } from "react";
+import dayjs from "dayjs";
+import "dayjs/locale/fr-ca";
 import {
   isBlockedDay,
   setSelected,
@@ -9,6 +10,10 @@ import {
   getNextDay,
   yearMonthDay
 } from "./Calendar/index";
+
+const LANGUAGES = ["en", "fr-ca"]; // en
+const LOCALE = LANGUAGES[1];
+dayjs.locale(LOCALE); // global
 
 const today = dayjs()
   .set("hour", 0)
@@ -27,16 +32,14 @@ const initialState = {
   selected: [yearMonthDay(firstDay)],
   focusedDayNum: dayjs(firstDay).format("D"),
   updateMessage: "",
-  _24hr: "off"
+  _24hr: LOCALE === "en" ? "off" : "on"
 };
 
-const store = createContext(initialState);
+export const store = createContext(initialState);
+
 const { Provider } = store;
 
-// @todo
-// - handle next, previous too far in the past or future
-
-const StateProvider = ({ children }) => {
+export const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     let newState = {};
     switch (action.type) {
@@ -121,5 +124,3 @@ const StateProvider = ({ children }) => {
 
   return <Provider value={{ ...state, dispatch }}>{children}</Provider>;
 };
-
-export { store, StateProvider };

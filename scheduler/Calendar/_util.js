@@ -97,7 +97,7 @@ const pastFirstDayInMonth = (day, state) => {
       .format("YYYY-MM-DD");
 
     if (dayjs(newMonth).isBefore(yearMonthDay(state.firstAvailableDate))) {
-      return { updateMessage: "At start of calendar" };
+      return { updateMessage: "at_start_of_calendar" };
     }
 
     return {
@@ -116,7 +116,7 @@ const pastLastDayInMonth = (day, state) => {
       .format("YYYY-MM-DD");
 
     if (dayjs(newMonth).isAfter(yearMonthDay(state.lastAvailableDate))) {
-      return { updateMessage: "At end of calendar" };
+      return { updateMessage: "at_end_of_calendar" };
     }
 
     return { updateMessage: "", date: newMonth, focusedDayNum: 1 };
