@@ -12,7 +12,14 @@ import {
 } from "./Calendar/index";
 
 const LANGUAGES = ["en", "fr-ca"]; // en
-const LOCALE = LANGUAGES[1];
+
+let params = new URL(document.location).searchParams;
+let langQuery = params.get("lang");
+let LOCALE = LANGUAGES[0];
+if (langQuery === "fr") {
+  LOCALE = LANGUAGES[1];
+}
+
 dayjs.locale(LOCALE); // global
 
 const today = dayjs()
