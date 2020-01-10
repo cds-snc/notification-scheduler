@@ -16,18 +16,6 @@ export const yearMonthDay = day => {
   return dayjs(day).format("YYYY-MM-DD");
 };
 
-export const getFirstDay = date => {
-  return dayjs(date)
-    .startOf("month")
-    .format("D");
-};
-
-export const getLastDay = date => {
-  return dayjs(date)
-    .endOf("month")
-    .format("D");
-};
-
 export const parseDay = date => {
   return dayjs(date).format("D");
 };
@@ -38,6 +26,18 @@ export const parseMonth = date => {
 
 export const parseYear = date => {
   return dayjs(date).format("YYYY");
+};
+
+export const getFirstDay = date => {
+  return dayjs(date)
+    .startOf("month")
+    .format("D");
+};
+
+export const getLastDay = date => {
+  return dayjs(date)
+    .endOf("month")
+    .format("D");
 };
 
 export const getDates = date => {
