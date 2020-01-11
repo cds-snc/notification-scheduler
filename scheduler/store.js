@@ -30,6 +30,9 @@ const today = dayjs()
 
 const firstDay = dayjs(today);
 
+// Note: date = YYYY-MM-DD on the calendar display not the current date
+// date - updates on prev / next month click
+
 const initialState = {
   today,
   firstAvailableDate: firstDay,

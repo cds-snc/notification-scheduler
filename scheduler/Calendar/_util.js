@@ -67,6 +67,10 @@ export const getDates = date => {
   return calendar;
 };
 
+export const isSelected = (arr, date) => {
+  return arr.findIndex(val => val === date);
+};
+
 export const setSelected = (arr, date, multi = false) => {
   const index = isSelected(arr, date);
 
@@ -86,12 +90,10 @@ export const setSelected = (arr, date, multi = false) => {
   return [date];
 };
 
-export const isSelected = (arr, date) => {
-  return arr.findIndex(val => val === date);
-};
-
-const pastFirstDayInMonth = (day, state) => {
+// rename to isBeforeFirstDayInMonth
+export const beforeFirstDayInMonth = state => {
   if (Number(state.focusedDayNum) === 1) {
+    // state.date is the YYYY-MM-DD on the calendar display not the current date
     const newMonth = dayjs(state.date)
       .subtract(1, "month")
       .format("YYYY-MM-DD");
@@ -109,7 +111,7 @@ const pastFirstDayInMonth = (day, state) => {
   return { updateMessage: "" };
 };
 
-const pastLastDayInMonth = (day, state) => {
+export const afterLastDayInMonth = state => {
   if (Number(state.focusedDayNum) === Number(state.lastDay)) {
     const newMonth = dayjs(state.date)
       .add(1, "month")
@@ -127,11 +129,11 @@ const pastLastDayInMonth = (day, state) => {
 
 export const getNextDay = (day, state, direction) => {
   if (day <= 0) {
-    return pastFirstDayInMonth(day, state);
+    return beforeFirstDayInMonth(state);
   }
 
   if (direction != "left" && day > state.lastDay) {
-    return pastLastDayInMonth(day, state);
+    return afterLastDayInMonth(state);
   }
 
   return { updateMessage: "", focusedDayNum: day };

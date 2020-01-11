@@ -7,7 +7,11 @@ import {
   parseYear,
   getFirstDay,
   getLastDay,
-  getDates
+  getDates,
+  isSelected,
+  setSelected,
+  beforeFirstDayInMonth,
+  pastLastDayInMonth
 } from "./_util";
 import dayjs from "dayjs";
 
@@ -75,5 +79,60 @@ describe("Creates an array of dayjs dates", function() {
     const dates = getDates("2020-01-01");
     const { $D: day } = dates[1][0];
     expect(day).toEqual(5);
+  });
+});
+
+describe("Selected dates", function() {
+  test("Is selected", async () => {
+    expect(isSelected(["2020-01-01"], "2020-01-01")).toEqual(0);
+    expect(isSelected(["2020-01-01"], "2020-01-02")).toEqual(-1);
+  });
+
+  test("Date select & deselect", async () => {
+    const dates = setSelected([], "2020-01-01");
+    expect(dates[0]).toEqual("2020-01-01");
+    expect(setSelected(dates, "2020-01-01")).toEqual([]);
+  });
+
+  test("Multi date select & deselect", async () => {
+    let dates = [];
+
+    //select a day
+    dates = setSelected(dates, "2020-01-01", true);
+    // select another day
+    dates = setSelected(dates, "2020-01-02", true);
+
+    expect(dates[1]).toEqual("2020-01-02");
+
+    // deselect the second day
+    dates = setSelected(dates, "2020-01-02", true);
+    expect(dates[0]).toEqual("2020-01-01");
+  });
+});
+
+describe("Is before or after date", function() {
+  
+  test("Is at start of calendar", async () => {
+    let date = "2020-01-15";
+    let firstAvailableDate = dayjs(date);
+    let stateObj = { ...state, firstAvailableDate, focusedDayNum: 1 };
+    expect(beforeFirstDayInMonth(stateObj)).toEqual({
+      updateMessage: "at_start_of_calendar"
+    });
+  });
+
+  test("Is at start of month but before first available", async () => {
+
+    let date = "2020-03-01"; // year month date we're displaying on the calendar
+    let firstAvailableDate = dayjs("2020-01-14");
+    let stateObj = { ...state, date, firstAvailableDate, focusedDayNum: 1 };
+
+    // Calendar date is March 01 2020
+    // expecting to move to last day in the previous month (Feb 29 2020)
+    expect(beforeFirstDayInMonth(stateObj)).toEqual({
+      date: "2020-02-01",
+      focusedDayNum: 29,
+      updateMessage: ""
+    });
   });
 });
