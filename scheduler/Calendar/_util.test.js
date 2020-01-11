@@ -11,7 +11,7 @@ import {
   isSelected,
   setSelected,
   beforeFirstDayInMonth,
-  pastLastDayInMonth
+  afterLastDayInMonth
 } from "./_util";
 import dayjs from "dayjs";
 
@@ -111,9 +111,8 @@ describe("Selected dates", function() {
 });
 
 describe("Is before or after date", function() {
-  
   test("Is at start of calendar", async () => {
-    let date = "2020-01-15";
+    let date = "2020-01-01";
     let firstAvailableDate = dayjs(date);
     let stateObj = { ...state, firstAvailableDate, focusedDayNum: 1 };
     expect(beforeFirstDayInMonth(stateObj)).toEqual({
@@ -122,7 +121,6 @@ describe("Is before or after date", function() {
   });
 
   test("Is at start of month but before first available", async () => {
-
     let date = "2020-03-01"; // year month date we're displaying on the calendar
     let firstAvailableDate = dayjs("2020-01-14");
     let stateObj = { ...state, date, firstAvailableDate, focusedDayNum: 1 };
@@ -132,6 +130,33 @@ describe("Is before or after date", function() {
     expect(beforeFirstDayInMonth(stateObj)).toEqual({
       date: "2020-02-01",
       focusedDayNum: 29,
+      updateMessage: ""
+    });
+  });
+
+  test("Is at end of calendar", async () => {
+    let date = "2020-02-01";
+    let lastDay = getLastDay(date);
+    let stateObj = { ...state, lastDay, focusedDayNum: 29 };
+    expect(afterLastDayInMonth(stateObj)).toEqual({
+      updateMessage: "at_end_of_calendar"
+    });
+  });
+
+  test("Is at start of month but before last available", async () => {
+    let date = "2020-02-01";
+    let lastDay = getLastDay(date);
+    let lastAvailableDate = dayjs("2020-03-31");
+    let stateObj = {
+      ...state,
+      date,
+      lastDay,
+      focusedDayNum: 29,
+      lastAvailableDate
+    };
+    expect(afterLastDayInMonth(stateObj)).toEqual({
+      date: "2020-03-01",
+      focusedDayNum: 1,
       updateMessage: ""
     });
   });
