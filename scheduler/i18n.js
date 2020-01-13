@@ -8,16 +8,18 @@ const translations = {
   fr: FR
 };
 
-const getTranslate = langCode => key => translations[langCode][key] || key;
+export const getTranslate = langCode => key =>
+  translations[langCode][key] || key;
 
 const initialState = {
-  langCode: "fr",
-  translate: getTranslate("fr")
+  langCode: "en",
+  translate: getTranslate("en")
 };
 
 export const I18nContext = React.createContext(initialState);
 
-export const I18nProvider = ({ children }) => {
+export const I18nProvider = ({ value = {}, children }) => {
+  const mergedState = { ...initialState, ...value };
   const reducer = (state, action) => {
     switch (action.type) {
       case "setLanguage":
@@ -26,11 +28,11 @@ export const I18nProvider = ({ children }) => {
           translate: getTranslate(action.payload)
         };
       default:
-        return { ...initialState };
+        return state;
     }
   };
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, mergedState);
 
   return (
     <I18nContext.Provider value={{ ...state, dispatch }}>

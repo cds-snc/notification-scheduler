@@ -22,34 +22,46 @@ if (langQuery === "fr") {
 
 dayjs.locale(LOCALE); // global
 
-const today = dayjs()
+const defaultToday = dayjs()
   .set("hour", 0)
   .set("minute", 0)
   .set("second", 0)
   .set("millisecond", 0);
 
-const firstDay = dayjs(today);
-
+const defautFirstDay = dayjs(defaultToday);
 // Note: date = YYYY-MM-DD on the calendar display not the current date
 // date - updates on prev / next month click
 
-const initialState = {
-  today,
-  firstAvailableDate: firstDay,
-  lastAvailableDate: dayjs(firstDay).add(1, "month"),
-  date: yearMonthDay(firstDay),
-  time: "9:00",
-  selected: [yearMonthDay(firstDay)],
-  focusedDayNum: dayjs(firstDay).format("D"),
-  updateMessage: "",
-  _24hr: LOCALE === "en" ? "off" : "on"
+export const setIntialState = (
+  data = {
+    today: defaultToday,
+    firstDay: defautFirstDay
+  }
+) => {
+  const { today, firstDay } = data;
+
+  return {
+    today,
+    firstAvailableDate: firstDay,
+    lastAvailableDate: dayjs(firstDay).add(1, "month"),
+    date: yearMonthDay(firstDay),
+    time: "9:00",
+    selected: [yearMonthDay(firstDay)],
+    focusedDayNum: dayjs(firstDay).format("D"),
+    updateMessage: "",
+    _24hr: LOCALE === "en" ? "off" : "on"
+  };
 };
+
+const initialState = setIntialState();
 
 export const store = createContext(initialState);
 
 const { Provider } = store;
 
-export const StateProvider = ({ children }) => {
+export const StateProvider = ({ value, children }) => {
+  const mergedState = { ...initialState, ...value };
+
   const [state, dispatch] = useReducer((state, action) => {
     let newState = {};
     switch (action.type) {
@@ -130,7 +142,7 @@ export const StateProvider = ({ children }) => {
     newState.lastDay = getLastDay(newState.date);
 
     return newState;
-  }, initialState);
+  }, mergedState);
 
   return <Provider value={{ ...state, dispatch }}>{children}</Provider>;
 };
