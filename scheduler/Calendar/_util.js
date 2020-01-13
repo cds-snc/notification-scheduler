@@ -2,7 +2,6 @@ import dayjs from "dayjs";
 
 export const isBlockedDay = (day, state) => {
   return (
-    day.isBefore(state.today) ||
     day.isBefore(state.firstAvailableDate) ||
     dayjs(day).isAfter(state.lastAvailableDate)
   );
