@@ -11,7 +11,8 @@ import {
   isSelected,
   setSelected,
   beforeFirstDayInMonth,
-  afterLastDayInMonth
+  afterLastDayInMonth,
+  getNextDay
 } from "./_util";
 import dayjs from "dayjs";
 
@@ -160,4 +161,10 @@ describe("Is before or after date", function() {
       updateMessage: ""
     });
   });
+});
+
+describe("Next day", function() {
+  // on first day left right up down
+  // on last day left right up down
+  // on 14th day left right up down
 });
