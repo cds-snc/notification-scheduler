@@ -68,7 +68,7 @@ export const StateProvider = ({ value, children }) => {
       case "AM_PM":
         newState = {
           ...state,
-          _24hr: action.payload === "off" ? "on" : "off",
+          _24hr: action.payload,
           updateMessage:
             action.payload === "off"
               ? "24 hr time selected"
