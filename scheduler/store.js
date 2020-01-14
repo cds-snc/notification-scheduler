@@ -45,7 +45,7 @@ export const setIntialState = (
     firstAvailableDate: firstDay,
     lastAvailableDate: dayjs(firstDay).add(1, "month"),
     date: yearMonthDay(firstDay),
-    time: "9:00",
+    time: "",
     selected: [yearMonthDay(firstDay)],
     focusedDayNum: dayjs(firstDay).format("D"),
     updateMessage: "",

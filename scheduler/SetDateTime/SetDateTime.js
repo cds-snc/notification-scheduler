@@ -6,7 +6,7 @@ const setDateAndTimeValue = val => {
 
   let value = val;
 
-  if (window.moment) {
+  if (window.moment && val) {
     value = moment(val)
       .utc()
       .format()
