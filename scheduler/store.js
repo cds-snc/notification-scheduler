@@ -20,6 +20,14 @@ if (langQuery === "fr") {
   LOCALE = LANGUAGES[1];
 }
 
+if (typeof(APP_LANG) !== "undefined" && APP_LANG === "fr") {
+  LOCALE = LANGUAGES[1];
+}
+
+if (typeof(APP_LANG) !== "undefined"  && APP_LANG === "en") {
+  LOCALE = LANGUAGES[0];
+}
+
 dayjs.locale(LOCALE); // global
 
 const defaultToday = dayjs()

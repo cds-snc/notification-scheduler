@@ -6,12 +6,12 @@ export const Toggle = () => {
   const { _24hr, time, dispatch } = useContext(store);
 
   if (time === "") {
-    return <div className="multiple-choice multiple-choice--radios"></div>;
+    return <div className="choice choice--radios"></div>;
   }
 
   return (
-    <div className="multiple-choice multiple-choice--radios">
-      <div className="multiple-choice__item">
+    <div className="choice choice--radios">
+      <div className="choice__item">
         <input
           name="time-toggle"
           type="radio"
@@ -25,14 +25,13 @@ export const Toggle = () => {
         <label htmlFor="am_pm">am/pm</label>
       </div>
 
-      <div className="multiple-choice__item">
+      <div className="choice__item">
         <input
           name="time-toggle"
           type="radio"
           id="_24"
           value="_24"
           onChange={() => {
-            console.log("turn on");
             dispatch({ type: "AM_PM", payload: "on" });
           }}
           checked={_24hr === "on" ? true : false}

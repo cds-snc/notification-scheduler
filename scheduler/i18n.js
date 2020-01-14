@@ -8,12 +8,30 @@ const translations = {
   fr: FR
 };
 
+const LANGUAGES = ["en", "fr"]; // en
+
+let params = new URL(document.location).searchParams;
+let langQuery = params.get("lang");
+
+let LOCALE = LANGUAGES[0];
+
+if (langQuery === "fr") {
+  LOCALE = LANGUAGES[1];
+}
+if (typeof APP_LANG !== "undefined" && APP_LANG === "fr") {
+  LOCALE = LANGUAGES[1];
+}
+
+if (typeof APP_LANG !== "undefined" && APP_LANG === "en") {
+  LOCALE = LANGUAGES[0];
+}
+
 export const getTranslate = langCode => key =>
   translations[langCode][key] || key;
 
 const initialState = {
-  langCode: "en",
-  translate: getTranslate("en")
+  langCode: LOCALE,
+  translate: getTranslate(LOCALE)
 };
 
 export const I18nContext = React.createContext(initialState);
