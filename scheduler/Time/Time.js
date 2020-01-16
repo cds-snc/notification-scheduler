@@ -11,7 +11,6 @@ export const Time = ({ name }) => {
   const { translate } = useContext(I18nContext);
 
   let startTime = 0;
-
   if (dateIsToday(today, selectedDate[0])) {
     const d = new Date();
     startTime = Number(d.getHours() + 1) * 60;
