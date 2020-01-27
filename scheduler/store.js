@@ -119,13 +119,15 @@ export const StateProvider = ({ value, children }) => {
       case "SELECT_NEXT":
         newState = {
           ...state,
-          date: yearMonthDay(dayjs(state.date).add(1, "month"))
+          date: yearMonthDay(dayjs(state.date).add(1, "month")),
+          focusedDayNum: 1 // @todo - get first non-blocked day
         };
         break;
       case "SELECT_PREVIOUS":
         newState = {
           ...state,
-          date: yearMonthDay(dayjs(state.date).subtract(1, "month"))
+          date: yearMonthDay(dayjs(state.date).subtract(1, "month")),
+          focusedDayNum: 1 // @todo - get first non-blocked day
         };
         break;
       case "FOCUS_DAY":
