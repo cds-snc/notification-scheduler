@@ -10,7 +10,7 @@ const weekdays = Array(7)
 
 export const DaysOfTheWeek = () => {
   return (
-    <div className="Calendar-days Calendar-row" aria-disabled="true" aria-hidden="false">
+    <div className="Calendar-days Calendar-row" aria-disabled="true" role="presentation" aria-hidden="true">
       {weekdays.map(day => {
         return (
           <span

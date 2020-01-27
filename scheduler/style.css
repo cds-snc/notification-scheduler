@@ -117,10 +117,6 @@
   width: 0.5px;
 }
 
-[aria-hidden="true"] {
-  display: none;
-}
-
 /* radios */
 .choice__item {
   font-size: 1.8rem;
