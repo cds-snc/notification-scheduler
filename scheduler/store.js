@@ -8,7 +8,8 @@ import {
   getFirstDay,
   getLastDay,
   getNextDay,
-  yearMonthDay
+  yearMonthDay,
+  getFirstAvailableDay
 } from "./Calendar/index";
 
 const LANGUAGES = ["en", "fr-ca"]; // en
@@ -117,17 +118,21 @@ export const StateProvider = ({ value, children }) => {
         }
         break;
       case "SELECT_NEXT":
+        const nextNewDate = yearMonthDay(dayjs(state.date).add(1, "month"));
         newState = {
           ...state,
-          date: yearMonthDay(dayjs(state.date).add(1, "month")),
-          focusedDayNum: 1 // @todo - get first non-blocked day
+          date: nextNewDate,
+          focusedDayNum: getFirstAvailableDay(nextNewDate, state)
         };
         break;
       case "SELECT_PREVIOUS":
+        const previousNewDate = yearMonthDay(
+          dayjs(state.date).subtract(1, "month")
+        );
         newState = {
           ...state,
-          date: yearMonthDay(dayjs(state.date).subtract(1, "month")),
-          focusedDayNum: 1 // @todo - get first non-blocked day
+          date: previousNewDate,
+          focusedDayNum: getFirstAvailableDay(previousNewDate, state)
         };
         break;
       case "FOCUS_DAY":
