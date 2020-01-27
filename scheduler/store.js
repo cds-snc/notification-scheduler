@@ -20,11 +20,11 @@ if (langQuery === "fr") {
   LOCALE = LANGUAGES[1];
 }
 
-if (typeof(APP_LANG) !== "undefined" && APP_LANG === "fr") {
+if (typeof APP_LANG !== "undefined" && APP_LANG === "fr") {
   LOCALE = LANGUAGES[1];
 }
 
-if (typeof(APP_LANG) !== "undefined"  && APP_LANG === "en") {
+if (typeof APP_LANG !== "undefined" && APP_LANG === "en") {
   LOCALE = LANGUAGES[0];
 }
 
@@ -57,7 +57,8 @@ export const setIntialState = (
     selected: [yearMonthDay(firstDay)],
     focusedDayNum: dayjs(firstDay).format("D"),
     updateMessage: "",
-    _24hr: LOCALE === "en" ? "off" : "on"
+    _24hr: LOCALE === "en" ? "off" : "on",
+    errors: ""
   };
 };
 
@@ -98,6 +99,21 @@ export const StateProvider = ({ value, children }) => {
             selected: setSelected(state.selected, action.payload),
             focusedDayNum: parseDay(action.payload)
           };
+
+          newState.errors = "";
+
+          if (
+            JSON.stringify(newState.selected) === JSON.stringify(state.selected)
+          ) {
+            // show deselect error
+            newState.errors = [
+              {
+                id: "1",
+                text: "Date must be selected",
+                target: "Calendar-dates"
+              }
+            ];
+          }
         }
         break;
       case "SELECT_NEXT":

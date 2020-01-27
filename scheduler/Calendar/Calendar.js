@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 import { YearMonth } from "./YearMonth";
 import { DaysOfTheWeek } from "./DaysOfTheWeek";
 import { Weeks } from "./Weeks";
@@ -15,7 +14,6 @@ export const Calendar = () => {
   const { translate } = useContext(I18nContext);
   return (
     <div className="date-time">
-      <ErrorMessage messages={[{ id: "1", text: "Date must be selected" }]} />
       <section className="Calendar" aria-label={translate("calendar")}>
         <YearMonth />
         <div className="Calendar-grid">

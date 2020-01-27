@@ -1,6 +1,7 @@
 import React from "react";
 import { StateProvider, setIntialState } from "./store";
 import { I18nProvider } from "./i18n";
+import { ErrorMessage } from "./ErrorMessage/ErrorMessage";
 import { Calendar } from "./Calendar/Calendar";
 import { DateTime } from "./DateTime/DateTime";
 import { SetDateTime } from "./SetDateTime/SetDateTime";
@@ -11,6 +12,7 @@ export const App = () => {
   return (
     <I18nProvider>
       <StateProvider value={providerState}>
+        <ErrorMessage />
         <div className="schedule">
           <div>
             <Calendar />

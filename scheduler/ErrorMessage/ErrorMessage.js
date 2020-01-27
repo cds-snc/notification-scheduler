@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { store } from "./index";
 import "./style.css";
 
 const ErrorItem = ({ text, target }) => {
@@ -11,8 +12,9 @@ const ErrorItem = ({ text, target }) => {
   );
 };
 
-export const ErrorMessage = ({ messages }) => {
-  if (!messages || messages.length > 1) {
+export const ErrorMessage = () => {
+  const { errors } = useContext(store);
+  if (!errors || errors.length > 1) {
     return null;
   }
 
@@ -22,8 +24,10 @@ export const ErrorMessage = ({ messages }) => {
         Please correct the errors on the page
       </h3>
       <ol className="error-list__list" id="formErrors">
-        {messages.map(item => {
-          return <ErrorItem key={item.id} text={item.text} />;
+        {errors.map(item => {
+          return (
+            <ErrorItem key={item.id} text={item.text} target={item.target} />
+          );
         })}
       </ol>
     </div>
