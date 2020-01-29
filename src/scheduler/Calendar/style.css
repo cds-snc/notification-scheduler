@@ -38,7 +38,7 @@
 }
 
 .Calendar-nav--button--unavailable {
-  cursor: url("img/disableddates.ico") 20 20, not-allowed;
+  /* cursor: url("img/disableddates.ico") 20 20, not-allowed;*/
   color: #000;
   opacity: 0.2;
   pointer-events: none;
@@ -97,7 +97,7 @@
 }
 
 .Calendar-item--unavailable {
-  cursor: url("img/disableddates.ico") 20 20, not-allowed;
+  /* cursor: url("img/disableddates.ico") 20 20, not-allowed;*/
   opacity: 0.5;
   pointer-events: none;
   background-color: white;
