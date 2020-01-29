@@ -91,12 +91,6 @@ export const setSelected = (arr, date, multi = false) => {
       return e !== date;
     });
 
-    if (cleaned.length === 0) {
-      // force at least one date to be selected
-      // don't deselect
-      return [...arr];
-    }
-
     return cleaned;
   }
 
