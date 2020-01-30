@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { store } from "./index";
-import "./style.css";
 
 const ErrorItem = ({ text, target }) => {
   return (

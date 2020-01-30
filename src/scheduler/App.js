@@ -5,7 +5,6 @@ import { ErrorMessage } from "./ErrorMessage/ErrorMessage";
 import { Calendar } from "./Calendar/Calendar";
 import { DateTime } from "./DateTime/DateTime";
 import { SetDateTime } from "./SetDateTime/SetDateTime";
-import "./style.css";
 
 export const App = () => {
   const providerState = setIntialState();

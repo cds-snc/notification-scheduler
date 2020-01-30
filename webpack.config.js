@@ -2,7 +2,6 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env, argv) => {
   console.info("running in mode:", argv.mode);
@@ -22,12 +21,8 @@ module.exports = (env, argv) => {
           use: ["babel-loader"]
         },
         {
-          test: /\.scss$/,
-          use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"]
-        },
-        {
-          test: /\.css$/i,
-          use: [MiniCssExtractPlugin.loader, "css-loader"]
+          test: /\.css$/,
+          use: ["style-loader", "css-loader"]
         }
       ]
     },
@@ -35,9 +30,6 @@ module.exports = (env, argv) => {
       extensions: ["*", ".js", ".jsx"]
     },
     plugins: [
-      new MiniCssExtractPlugin({
-        filename: "css/styles.css"
-      }),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: "Development",

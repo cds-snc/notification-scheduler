@@ -2,20 +2,7 @@ import React, { useContext } from "react";
 import { store } from "./index";
 
 const setDateAndTimeValue = val => {
-  const ref = document.getElementById("scheduled_for");
-
-  let value = val;
-
-  if (window.moment && val) {
-    value = moment(val)
-      .utc()
-      .format()
-      .replace("Z", "");
-  }
-
-  if (ref) {
-    ref.setAttribute("value", value);
-  }
+  return val;
 };
 
 export const SetDateTime = () => {
