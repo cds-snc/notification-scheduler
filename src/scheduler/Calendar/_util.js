@@ -1,6 +1,13 @@
 import dayjs from "dayjs";
 
 export const isBlockedDay = (day, state) => {
+  if (
+    window.scheduleData && 
+    window.scheduleData.blockedDays && 
+    window.scheduleData.blockedDays.indexOf(day.$W) > -1
+    ) {
+    return true
+  }
   return (
     dayjs(day).isBefore(state.firstAvailableDate) ||
     dayjs(day).isAfter(state.lastAvailableDate)

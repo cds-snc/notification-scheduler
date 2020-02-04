@@ -48,11 +48,16 @@ export const setIntialState = (
   }
 ) => {
   const { today, firstDay } = data;
-
+  let lastAvailableDate;
+  if (window.scheduleData && window.scheduleData.dateRange) {
+    lastAvailableDate = dayjs(firstDay).add(window.scheduleData.dateRange, "day")
+  } else {
+    lastAvailableDate = dayjs(firstDay).add(1, "month")
+  }
   return {
     today,
     firstAvailableDate: firstDay,
-    lastAvailableDate: dayjs(firstDay).add(1, "month"),
+    lastAvailableDate: lastAvailableDate,
     date: yearMonthDay(firstDay),
     time: "",
     selected: [yearMonthDay(firstDay)],

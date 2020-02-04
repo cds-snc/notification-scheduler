@@ -1,6 +1,10 @@
 # Notification Scheduler
 
 
+
+> Note: Calendar inspired by A New Day: [Making a Better Calendar](https://www.24a11y.com/2018/a-new-day-making-a-better-calendar)
+
+
 ## Setup with [Notify](https://github.com/cds-snc/notification-admin)
 
 - Copy the scheduler directory to the admin repository
