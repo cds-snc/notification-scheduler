@@ -27,7 +27,8 @@ const defautFirstDay = dayjs(defaultToday);
 // Note: date = YYYY-MM-DD on the calendar display not the current date
 // date - updates on prev / next month click
 
-export const setIntialState = (
+//
+export const defaultState = (
   data = {
     today: defaultToday,
     firstDay: defautFirstDay
@@ -35,11 +36,8 @@ export const setIntialState = (
 ) => {
   const { today, firstDay } = data;
   let lastAvailableDate;
-  if (window.scheduleData && window.scheduleData.dateRange) {
-    lastAvailableDate = dayjs(firstDay).add(window.scheduleData.dateRange, "day")
-  } else {
-    lastAvailableDate = dayjs(firstDay).add(1, "month")
-  }
+  lastAvailableDate = dayjs(firstDay).add(1, "month");
+
   return {
     today,
     firstAvailableDate: firstDay,
@@ -54,7 +52,15 @@ export const setIntialState = (
   };
 };
 
-const initialState = setIntialState();
+//
+
+let options = {};
+
+options = { setIntialState: defaultState, ...window.schedulerOptions };
+
+const initialState = options.setIntialState();
+
+export const setIntialState = options.setIntialState;
 
 export const store = createContext(initialState);
 

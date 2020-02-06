@@ -1,13 +1,22 @@
 import React from "react";
-import { StateProvider, setIntialState } from "./store";
+import { StateProvider, setIntialState, defaultState } from "./store";
 import { I18nProvider } from "./i18n";
 import { ErrorMessage } from "./ErrorMessage/ErrorMessage";
 import { Calendar } from "./Calendar/Calendar";
 import { DateTime } from "./DateTime/DateTime";
 import { SetDateTime } from "./SetDateTime/SetDateTime";
+import dayjs from "dayjs";
 
 export const App = () => {
-  const providerState = setIntialState();
+  let options = {};
+
+  options = { init: setIntialState, ...window.schedulerOptions };
+
+  const providerState = options.init({
+    dayjs,
+    defaultState: defaultState()
+  });
+
   return (
     <I18nProvider>
       <StateProvider value={providerState}>

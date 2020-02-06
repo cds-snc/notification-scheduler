@@ -23,6 +23,25 @@
     </form>
     <script>
       window.schedulerOptions = {
+        init: data => {
+          const { dayjs, defaultState } = data;
+
+          const firstDay = dayjs("2020-02-15");
+          lastAvailableDate = dayjs(firstDay).add(3, "months");
+
+          return {
+            today: firstDay,
+            firstAvailableDate: firstDay,
+            lastAvailableDate: lastAvailableDate,
+            date: dayjs(firstDay).format("YYYY-MM-DD"),
+            time: "",
+            selected: [dayjs(firstDay).format("YYYY-MM-DD")],
+            focusedDayNum: dayjs(firstDay).format("D"),
+            updateMessage: "",
+            _24hr: "en",
+            errors: ""
+          };
+        },
         populateTimes: () => {
           return [{ val: "1:00", label: "1:00 AM" }];
         },
