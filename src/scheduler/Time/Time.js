@@ -16,12 +16,7 @@ export const Time = ({ name }) => {
   }
 
   const times = [{ val: "", label: translate("send_now") }];
-  let values
-  if(window.scheduleData && window.scheduleData.availableTimes) {
-    values = window.scheduleData.availableTimes
-  } else {
-    values = populateTimes(times, _24hr, startTime);
-  }
+  const values = populateTimes(times, _24hr, startTime);
   return (
     <div className="Nav--select">
       <select
