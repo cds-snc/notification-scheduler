@@ -2,4 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { App } from "./scheduler/App";
 
-ReactDOM.render(<App />, document.getElementById("schedule-send-at"));
+// schedule-send-at
+window.renderCalendar = target => {
+  ReactDOM.render(<App />, document.getElementById(target));
+};
