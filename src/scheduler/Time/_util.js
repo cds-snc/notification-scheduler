@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-export const populateTimes = (times = [], _24hr = false, startTime = 0) => {
+const timeValues = (times = [], _24hr = false, startTime = 0) => {
   let hours, hours24, minutes, ampm;
 
   for (let i = startTime; i <= 1380; i += 60) {
@@ -39,3 +39,9 @@ export const populateTimes = (times = [], _24hr = false, startTime = 0) => {
 export const dateIsToday = (today, date) => {
   return dayjs(today).isSame(dayjs(date));
 };
+
+let options = {};
+
+options = { populateTimes: timeValues, ...window.schedulerOptions };
+
+export const populateTimes = options.populateTimes;
