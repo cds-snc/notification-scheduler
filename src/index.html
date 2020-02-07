@@ -22,6 +22,14 @@
       <div id="schedule-send-at"></div>
     </form>
     <script>
+      const populateTimes = () => {
+        return [
+          { val: "1:00", label: "1:00 AM" },
+          { val: "2:00", label: "2:00 AM" },
+          { val: "3:00", label: "3:00 AM" }
+        ];
+      };
+
       window.schedulerOptions = {
         init: data => {
           const { dayjs, defaultState } = data;
@@ -35,15 +43,13 @@
             lastAvailableDate: lastAvailableDate,
             date: dayjs(firstDay).format("YYYY-MM-DD"),
             time: "",
+            time_values: populateTimes(),
             selected: [dayjs(firstDay).format("YYYY-MM-DD")],
             focusedDayNum: dayjs(firstDay).format("D"),
             updateMessage: "",
             _24hr: "en",
             errors: ""
           };
-        },
-        populateTimes: () => {
-          return [{ val: "1:00", label: "1:00 AM" }];
         },
         isBlockedDay: day => {
           const data = {
@@ -66,6 +72,21 @@
       setTimeout(function() {
         window.renderCalendar("schedule-send-at");
       }, 2000);
+
+      setTimeout(function() {
+        const myEvent = new CustomEvent("build", {
+          detail: {
+            type: "TIME_VALUES",
+            payload: [
+              { val: "1:00", label: "1:00 PM" },
+              { val: "2:00", label: "2:00 PM" },
+              { val: "3:00", label: "3:00 PM" },
+              { val: "4:00", label: "4:00 PM" }
+            ]
+          }
+        });
+        window.dispatchEvent(myEvent);
+      }, 10000);
     </script>
   </body>
 </html>

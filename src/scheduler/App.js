@@ -5,6 +5,7 @@ import { ErrorMessage } from "./ErrorMessage/ErrorMessage";
 import { Calendar } from "./Calendar/Calendar";
 import { DateTime } from "./DateTime/DateTime";
 import { SetDateTime } from "./SetDateTime/SetDateTime";
+import { DomEventHandler } from "./DomEventHandler/DomEventHandler";
 import dayjs from "dayjs";
 
 export const App = () => {
@@ -20,6 +21,7 @@ export const App = () => {
   return (
     <I18nProvider>
       <StateProvider value={providerState}>
+        <DomEventHandler />
         <ErrorMessage />
         <div className="schedule">
           <div>

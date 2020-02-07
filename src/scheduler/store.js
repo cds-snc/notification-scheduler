@@ -1,4 +1,5 @@
 import React, { createContext, useReducer } from "react";
+import { populateTimes } from "./Time/_util";
 import dayjs from "dayjs";
 import "dayjs/locale/fr-ca";
 import {
@@ -27,7 +28,6 @@ const defautFirstDay = dayjs(defaultToday);
 // Note: date = YYYY-MM-DD on the calendar display not the current date
 // date - updates on prev / next month click
 
-//
 export const defaultState = (
   data = {
     today: defaultToday,
@@ -43,12 +43,13 @@ export const defaultState = (
     firstAvailableDate: firstDay,
     lastAvailableDate: lastAvailableDate,
     date: yearMonthDay(firstDay),
-    time: "",
     selected: [yearMonthDay(firstDay)],
     focusedDayNum: dayjs(firstDay).format("D"),
     updateMessage: "",
     _24hr: LOCALE === "en" ? "off" : "on",
-    errors: ""
+    errors: "",
+    time: "",
+    time_values: populateTimes(false, defautFirstDay)
   };
 };
 
@@ -87,6 +88,9 @@ export const StateProvider = ({ value, children }) => {
         break;
       case "SELECT_TIME":
         newState = { ...state, time: action.payload };
+        break;
+      case "TIME_VALUES":
+        newState = { ...state, time_values: action.payload };
         break;
       case "SELECT_DATE":
         if (isBlockedDay(dayjs(action.payload), state)) {
