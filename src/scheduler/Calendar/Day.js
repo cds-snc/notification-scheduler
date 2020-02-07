@@ -3,14 +3,13 @@ import React, { useContext, useRef, useEffect } from "react";
 import {
   store,
   I18nContext,
-  isBlockedDay,
   formattedDay,
   yearMonthDay,
   isSelected
 } from "./index";
 
 export const Day = ({ day }) => {
-  const { today, selected, focusedDayNum, dispatch } = useContext(store);
+  const { today, selected, focusedDayNum, dispatch, isBlockedDay } = useContext(store);
   const { translate } = useContext(I18nContext);
   const { $D: dayNum = 0 } = day;
   const { $D: todayDayNum = 0 } = today;
