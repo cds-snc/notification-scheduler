@@ -207,6 +207,8 @@
 .Nav--select::after {
   border-top: 0.63px solid black;
   border-right: 0.63px solid black;
+  border-left: none;
+  border-bottom: none;
   border-width: 1.88px;
   content: "";
   display: block;
@@ -374,4 +376,8 @@
   border: 9px solid;
   border-radius: 50%;
   background: currentColor;
+}
+
+.schedule {
+  line-height: 1;
 }
