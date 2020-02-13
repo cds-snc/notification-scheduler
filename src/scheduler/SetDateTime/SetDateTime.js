@@ -2,7 +2,10 @@ import React, { useContext } from "react";
 import { store } from "./index";
 
 const setDateAndTimeValue = val => {
-  return val;
+  const ref = document.getElementById("hidden-value")
+  if (ref && val) {
+    ref.setAttribute("value", val)
+  }
 };
 
 export const SetDateTime = () => {
