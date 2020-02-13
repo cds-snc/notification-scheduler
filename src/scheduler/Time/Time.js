@@ -14,7 +14,6 @@ export const Time = ({ name }) => {
           });
         }}
         id={name}
-        name={name}
         aria-label={name}
         value={time}
       >
