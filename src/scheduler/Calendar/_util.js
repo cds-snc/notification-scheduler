@@ -1,17 +1,10 @@
 import dayjs from "dayjs";
 
-const blockedDay = (day, state) => {
-  return (
-    dayjs(day).isBefore(state.firstAvailableDate) ||
-    dayjs(day).isAfter(state.lastAvailableDate)
-  );
-};
-
 let options = {};
 
-options = { isBlockedDay: blockedDay, ...window.schedulerOptions };
-
-export const isBlockedDay = options.isBlockedDay;
+options = { ...window.schedulerOptions };
+export const isBlockedDay = options.init(dayjs).isBlockedDay;
+console.log("options", options)
 
 export const getFirstAvailableDay = (day, state) => {
   if (dayjs(day).isSame(state.firstAvailableDate)) {

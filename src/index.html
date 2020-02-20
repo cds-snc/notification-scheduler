@@ -31,22 +31,27 @@
         ];
       };
 
-      const isBlockedDay = day => {
-        const today = new Date()
-        if (today > day) {
-          return true;
+      const getIsBlockedDay = (dayjs) => {
+        return (day, state) => {
+          const today = dayjs(new Date())
+          if (today > day) {
+            return true;
+          }
+          const blockedDays = [1, 3, 4]
+          if (blockedDays.indexOf(day.$W) > -1) {
+            return true;
+          }
+          return false
         }
-        const blockedDays = [1, 3, 4]
-        if (blockedDays && blockedDays.indexOf(day.$W) > -1) {
-          return true;
-        }
-      }
+
+      } 
+
       window.schedulerOptions = {
-        init: data => {
-          const { dayjs, defaultState } = data;
+        init: dayjs => {
           const today = new Date()
           let firstDay = new Date()
           const oneDay = 24*60*60*1000
+          const isBlockedDay = getIsBlockedDay(dayjs)
           while (isBlockedDay(dayjs(firstDay))) {
             firstDay = new Date(firstDay.getTime() + oneDay)
           }

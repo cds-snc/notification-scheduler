@@ -94,6 +94,12 @@ export const StateProvider = ({ value, children }) => {
         break;
       case "SELECT_DATE":
         if (isBlockedDay(dayjs(action.payload), state)) {
+          console.log("trying to select blocked day")
+          // const blockedDays = [1, 3, 4]
+          // const day = dayjs(action.payload)
+          // console.log("blockedDays.indexOf(day.$W)", blockedDays.indexOf(day.$W))
+          // console.log("action.payload", action.payload)
+          // console.log("day", dayjs(action.payload))
           newState = { ...state };
         } else {
           newState = {
