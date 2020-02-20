@@ -4,7 +4,6 @@ let options = {};
 
 options = { ...window.schedulerOptions };
 export const isBlockedDay = options.init(dayjs).isBlockedDay;
-console.log("options", options)
 
 export const getFirstAvailableDay = (day, state) => {
   if (dayjs(day).isSame(state.firstAvailableDate)) {
