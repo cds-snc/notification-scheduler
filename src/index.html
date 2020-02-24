@@ -59,15 +59,15 @@
             date: dayjs(firstDay).format("YYYY-MM-DD"),
             time: "",
             time_values: populateTimes(),
+            isBlockedDay: isBlockedDay,
             selected: [dayjs(firstDay).format("YYYY-MM-DD")],
             focusedDayNum: dayjs(firstDay).format("D"),
             updateMessage: "",
             _24hr: "en",
             errors: "",
-            hiddenValueRef: document.getElementById("hidden-value"),
+            hiddenValueRef: document.getElementById("hidden-value")
           };
         },
-        getIsBlockedDay: () => isBlockedDay,
       };
     </script>
 
