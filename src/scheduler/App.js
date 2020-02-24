@@ -1,5 +1,5 @@
 import React from "react";
-import { StateProvider, setIntialState } from "./store";
+import { StateProvider, setIntialState, defaultState } from "./store";
 import { I18nProvider } from "./i18n";
 import { ErrorMessage } from "./ErrorMessage/ErrorMessage";
 import { Calendar } from "./Calendar/Calendar";
@@ -13,7 +13,11 @@ export const App = () => {
 
   options = { init: setIntialState, ...window.schedulerOptions };
 
-  const providerState = options.init(dayjs);
+  // const providerState = options.init(dayjs);
+  const providerState = options.init({
+    dayjs,	
+    defaultState: defaultState()
+  })
 
   return (
     <I18nProvider>

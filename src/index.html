@@ -47,7 +47,8 @@
       } 
 
       window.schedulerOptions = {
-        init: dayjs => {
+        init: data => {
+          const { dayjs, defaultState } = data
           const today = new Date()
           let firstDay = new Date()
           const oneDay = 24*60*60*1000

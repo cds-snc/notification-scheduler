@@ -3,9 +3,9 @@ import dayjs from "dayjs";
 let options = {};
 
 options = { ...window.schedulerOptions };
-export const isBlockedDay = options.init(dayjs).isBlockedDay;
 
 export const getFirstAvailableDay = (day, state) => {
+  const isBlockedDay = options.init({ dayjs: dayjs, state: state }).isBlockedDay;
   if (dayjs(day).isSame(state.firstAvailableDate)) {
     return parseDay(state.firstAvailableDate);
   }
