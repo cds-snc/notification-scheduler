@@ -13,11 +13,10 @@ export const App = () => {
 
   options = { init: setIntialState, ...window.schedulerOptions };
 
-  // const providerState = options.init(dayjs);
   const providerState = options.init({
-    dayjs,	
+    dayjs,
     defaultState: defaultState()
-  })
+  });
 
   return (
     <I18nProvider>

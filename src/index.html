@@ -31,28 +31,22 @@
         ];
       };
 
-      const getIsBlockedDay = (dayjs) => {
-        return (day, state) => {
-          const today = dayjs(new Date())
-          if (today > day) {
-            return true;
-          }
-          const blockedDays = [1, 3, 4]
-          if (blockedDays.indexOf(day.$W) > -1) {
-            return true;
-          }
-          return false
+      const isBlockedDay = day => {
+        const today = new Date()
+        if (today > day) {
+          return true;
         }
-
-      } 
-
+        const blockedDays = [1, 3, 4]
+        if (blockedDays && blockedDays.indexOf(day.$W) > -1) {
+          return true;
+        }
+      }
       window.schedulerOptions = {
         init: data => {
-          const { dayjs, defaultState } = data
+          const { dayjs, defaultState } = data;
           const today = new Date()
           let firstDay = new Date()
           const oneDay = 24*60*60*1000
-          const isBlockedDay = getIsBlockedDay(dayjs)
           while (isBlockedDay(dayjs(firstDay))) {
             firstDay = new Date(firstDay.getTime() + oneDay)
           }
@@ -65,7 +59,6 @@
             date: dayjs(firstDay).format("YYYY-MM-DD"),
             time: "",
             time_values: populateTimes(),
-            isBlockedDay: isBlockedDay,
             selected: [dayjs(firstDay).format("YYYY-MM-DD")],
             focusedDayNum: dayjs(firstDay).format("D"),
             updateMessage: "",
@@ -74,6 +67,7 @@
             hiddenValueRef: document.getElementById("hidden-value")
           };
         },
+        isBlockedDay: isBlockedDay,
       };
     </script>
 

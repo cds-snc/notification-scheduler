@@ -44,6 +44,7 @@ export const defaultState = (
     lastAvailableDate: lastAvailableDate,
     date: yearMonthDay(firstDay),
     selected: [yearMonthDay(firstDay)],
+    isBlockedDay: isBlockedDay,
     focusedDayNum: dayjs(firstDay).format("D"),
     updateMessage: "",
     _24hr: LOCALE === "en" ? "off" : "on",
