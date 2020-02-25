@@ -3,7 +3,6 @@ import { populateTimes } from "./Time/_util";
 import dayjs from "dayjs";
 import "dayjs/locale/fr-ca";
 import {
-  isBlockedDay,
   setSelected,
   parseDay,
   getFirstDay,
@@ -38,6 +37,13 @@ export const defaultState = (
   let lastAvailableDate;
   lastAvailableDate = dayjs(firstDay).add(1, "month");
 
+  const blockedDay = day => {
+    return (
+      dayjs(day).isBefore(firstDay) ||
+      dayjs(day).isAfter(lastAvailableDate)
+    );
+  };
+
   return {
     today,
     firstAvailableDate: firstDay,
@@ -49,7 +55,8 @@ export const defaultState = (
     _24hr: LOCALE === "en" ? "off" : "on",
     errors: "",
     time: "",
-    time_values: populateTimes(false, defautFirstDay)
+    time_values: populateTimes(false, defautFirstDay),
+    isBlockedDay: blockedDay
   };
 };
 
@@ -69,7 +76,6 @@ const { Provider } = store;
 
 export const StateProvider = ({ value, children }) => {
   const mergedState = { ...initialState, ...value };
-
   const [state, dispatch] = useReducer((state, action) => {
     let newState = {};
     switch (action.type) {
@@ -93,7 +99,7 @@ export const StateProvider = ({ value, children }) => {
         newState = { ...state, time_values: action.payload };
         break;
       case "SELECT_DATE":
-        if (isBlockedDay(dayjs(action.payload), state)) {
+        if (state.isBlockedDay(dayjs(action.payload))) {
           newState = { ...state };
         } else {
           newState = {
