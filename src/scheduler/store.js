@@ -99,7 +99,7 @@ export const StateProvider = ({ value, children }) => {
         newState = { ...state, time_values: action.payload };
         break;
       case "SELECT_DATE":
-        if (mergedState.isBlockedDay(dayjs(action.payload))) {
+        if (state.isBlockedDay(dayjs(action.payload))) {
           newState = { ...state };
         } else {
           newState = {
