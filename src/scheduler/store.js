@@ -46,8 +46,6 @@ export const defaultState = (
   };
 
   const time_values = populateTimes(false, defautFirstDay);
-  console.log(time_values)
-  console.log(time_values[0])
 
   return {
     today,

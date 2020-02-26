@@ -3,7 +3,7 @@ import { store } from "./index";
 
 export const Time = ({ name }) => {
   const { time, time_values, dispatch } = useContext(store);
-  console.log(useContext(store))
+
   return (
     <div className="Nav--select">
       <select
