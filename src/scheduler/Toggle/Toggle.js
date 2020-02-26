@@ -3,7 +3,7 @@ import { store } from "./index";
 
 export const Toggle = () => {
   const { _24hr, time, dispatch, selected } = useContext(store);
-
+  console.log(useContext(store))
   if (time === "") {
     return <div className="choice choice--radios"></div>;
   }

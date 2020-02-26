@@ -1,7 +1,9 @@
 import dayjs from "dayjs";
 
 export const populateTimes = (_24hr = false, date) => {
+  console.log(date)
   const startTime = getStartTime(date);
+  console.log(startTime)
   let times = [];
   let hours, hours24, minutes, ampm;
 
@@ -16,6 +18,7 @@ export const populateTimes = (_24hr = false, date) => {
 
     ampm = "";
     ampm = hours % 24 < 12 ? "AM" : "PM";
+
     hours = hours % 12;
     if (hours === 0) {
       hours = 12;
@@ -28,12 +31,15 @@ export const populateTimes = (_24hr = false, date) => {
     let postfix = ampm ? ` ${ampm}` : "";
     let label = `${hours24}:${minutes}`;
 
+    console.log(hours24)
+
     if (_24hr === "off") {
       label = `${hours}:${minutes}${postfix}`;
     }
 
     times.push({ val: `${hours24}:${minutes}`, label });
   }
+  console.log(times)
 
   return times;
 };

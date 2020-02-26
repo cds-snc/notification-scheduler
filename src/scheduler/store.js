@@ -34,6 +34,7 @@ export const defaultState = (
   }
 ) => {
   const { today, firstDay } = data;
+
   let lastAvailableDate;
   lastAvailableDate = dayjs(firstDay).add(1, "month");
 
@@ -43,6 +44,10 @@ export const defaultState = (
       dayjs(day).isAfter(lastAvailableDate)
     );
   };
+
+  const time_values = populateTimes(false, defautFirstDay);
+  console.log(time_values)
+  console.log(time_values[0])
 
   return {
     today,
@@ -54,8 +59,8 @@ export const defaultState = (
     updateMessage: "",
     _24hr: LOCALE === "en" ? "off" : "on",
     errors: "",
-    time: "",
-    time_values: populateTimes(false, defautFirstDay),
+    time: time_values[0],
+    time_values: time_values,
     isBlockedDay: blockedDay
   };
 };
