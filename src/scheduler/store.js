@@ -48,6 +48,8 @@ export const defaultState = (
   const time_values = populateTimes(false, defautFirstDay);
   console.log("store time_values:")
   console.log(time_values)
+  console.log("default first time:")
+  console.log(time_values[0])
 
   return {
     today,
