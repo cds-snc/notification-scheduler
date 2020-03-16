@@ -1,21 +1,24 @@
 import React, { useContext } from "react";
 import dayjs from "dayjs";
-import { store } from "./index";
+import { store, I18nContext } from "./index";
 
 export const Confirmation = () => {
   const { selected, time } = useContext(store);
+  const { translate } = useContext(I18nContext);
 
   // reconstruct date for display:
   const date = selected + "T" + time;
 
+  console.log(time)
+
   return (selected && time) ? (
     <div className="confirmation set">
-      <p>Message will be sent on:</p>
-      <p><strong>{dayjs(date).format('dddd, MMMM D, YYYY')} at {dayjs(date).format('h:mm A')}</strong></p>
+      <p>{translate("message_will_be_sent")}</p>
+      <p><strong>{translate("date_prefix")}{dayjs(date).format(translate("date_format"))} {translate("at")} {dayjs(date).format(translate("time_format"))}</strong></p>
     </div>
   ) : (
     <div className="confirmation unset">
-      <p>No date or time selected. Please use the calendar above to schedule</p>
+      <p>{translate("no_time_selected")}</p>
     </div>
   );
 };
