@@ -5,6 +5,7 @@ import { ErrorMessage } from "./ErrorMessage/ErrorMessage";
 import { Calendar } from "./Calendar/Calendar";
 import { DateTime } from "./DateTime/DateTime";
 import { SetDateTime } from "./SetDateTime/SetDateTime";
+import { Confirmation } from "./Confirmation/Confirmation";
 import { DomEventHandler } from "./DomEventHandler/DomEventHandler";
 import dayjs from "dayjs";
 
@@ -29,6 +30,9 @@ export const App = () => {
           </div>
           <DateTime />
           <SetDateTime />
+        </div>
+        <div className="confirmationWrapper">
+          <Confirmation />
         </div>
       </StateProvider>
     </I18nProvider>
