@@ -51,14 +51,16 @@
             firstDay = new Date(firstDay.getTime() + oneDay)
           }
           lastAvailableDate = dayjs(firstDay).add(3, "months");
+          
+          const time_values = populateTimes()
 
           return {
             today: dayjs(today),
             firstAvailableDate: firstDay,
             lastAvailableDate: lastAvailableDate,
             date: dayjs(firstDay).format("YYYY-MM-DD"),
-            time: "",
-            time_values: populateTimes(),
+            time: time_values[0].val,
+            time_values: time_values,
             isBlockedDay: isBlockedDay,
             selected: [dayjs(firstDay).format("YYYY-MM-DD")],
             focusedDayNum: dayjs(firstDay).format("D"),
