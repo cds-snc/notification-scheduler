@@ -384,7 +384,7 @@
 
 .confirmationWrapper {
   font-size: 20px;
-  line-height: 27px;
+  line-height: 1.25;
   color: #0B0C0C;
   max-width: 706px;
 }
