@@ -44,11 +44,13 @@ export const dateIsToday = (date) => {
     .set("minute", 0)
     .set("second", 0)
     .set("millisecond", 0);
+
   return today.isSame(dayjs(date[0]), 'day');
 };
 
 export const timeValuesToday = (selected, time_values) => {
   const today = dayjs()
+  
   return time_values.filter(time => {
     const t = dayjs(selected + "T" + time.val);
     return t.isAfter(today)
@@ -57,6 +59,7 @@ export const timeValuesToday = (selected, time_values) => {
 
 export const getStartTime = date => {
   let startTime = 0;
+
   if (dateIsToday(date)) {
     const d = new Date();
     startTime = Number(d.getHours() + 1) * 60;
