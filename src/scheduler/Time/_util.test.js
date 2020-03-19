@@ -2,7 +2,6 @@ import {
   populateTimes,
   dateIsToday,
   timeValuesToday,
-  getStartTime,
 } from "./_util";
 import dayjs from "dayjs";
 
@@ -28,16 +27,8 @@ describe("Time utils", function() {
 
   const constructedToday = dayjsToday.year() + "-" + (dayjsToday.month() + 1) + "-" + dayjsToday.date()
 
-  test("getStartTime correctly returns midnight for a day that is not today", async () => {
-    expect(getStartTime(state.today)).toBe(0); // midnight
-  });
-
-  test("getStartTime does not return midnight when the day is today", async () => {
-    expect(getStartTime(dayjsToday)).not.toBe(0);
-  });
-
   test("Populate Times shows all 24h for a future date", async () => {
-    expect(populateTimes(false, ["2050-01-01"])).toHaveLength(24)
+    expect(populateTimes(false)).toHaveLength(24)
   });
 
   test("dateIsToday returns true when evaluating today", async () => {
