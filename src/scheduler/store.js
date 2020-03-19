@@ -33,7 +33,7 @@ export const defaultState = (
     firstDay: defautFirstDay
   }
 ) => {
-  const { today, firstDay } = data;
+  const { today, firstDay } = data.defaultState ? data.defaultState: data;
 
   let lastAvailableDate;
   lastAvailableDate = dayjs(firstDay).add(1, "month");
@@ -45,7 +45,7 @@ export const defaultState = (
     );
   };
 
-  const time_values = populateTimes(false, defautFirstDay);
+  const time_values = populateTimes(false);
 
   return {
     today,

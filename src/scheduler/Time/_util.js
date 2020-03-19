@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 
-export const populateTimes = (_24hr = false, date) => {
-  const startTime = getStartTime(date);
+export const populateTimes = (_24hr = false) => {
+  const startTime = 0
   let times = [];
   let hours, hours24, minutes, ampm;
 
@@ -56,14 +56,3 @@ export const timeValuesToday = (selected, time_values) => {
     return t.isAfter(today)
   })
 }
-
-export const getStartTime = date => {
-  let startTime = 0;
-
-  if (dateIsToday(date)) {
-    const d = new Date();
-    startTime = Number(d.getHours() + 1) * 60;
-  }
-
-  return startTime;
-};
