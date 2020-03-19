@@ -9,8 +9,6 @@ export const Confirmation = () => {
   // reconstruct date for display:
   const date = selected + "T" + time;
 
-  console.log(time)
-
   return (selected && time) ? (
     <div className="confirmation set">
       <p>{translate("message_will_be_sent")}</p>

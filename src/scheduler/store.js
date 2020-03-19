@@ -63,8 +63,6 @@ export const defaultState = (
   };
 };
 
-//
-
 let options = {};
 
 options = { setIntialState: defaultState, ...window.schedulerOptions };
@@ -99,6 +97,7 @@ export const StateProvider = ({ value, children }) => {
         newState = { ...state, time: action.payload };
         break;
       case "TIME_VALUES":
+        //time_values = populateTimes(action.payload)
         newState = { ...state, time_values: action.payload };
         break;
       case "SELECT_DATE":
