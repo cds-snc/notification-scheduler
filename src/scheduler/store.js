@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { populateTimes } from "./Time/_util";
+import { populateTimes, dateIsToday, timeValuesToday } from "./Time/_util";
 import dayjs from "dayjs";
 import "dayjs/locale/fr-ca";
 import {
@@ -39,8 +39,10 @@ export const defaultState = (
   lastAvailableDate = dayjs(firstDay).add(1, "month");
 
   const blockedDay = day => {
+    const beforeFirstDay = firstDay ? dayjs(day).isBefore(firstDay) : false;
     return (
-      dayjs(day).isBefore(firstDay) ||
+      today > day ||
+      beforeFirstDay ||
       dayjs(day).isAfter(lastAvailableDate)
     );
   };
@@ -104,16 +106,18 @@ export const StateProvider = ({ value, children }) => {
         if (state.isBlockedDay(dayjs(action.payload))) {
           newState = { ...state };
         } else {
+          let newTime = dateIsToday([action.payload]) ? timeValuesToday([action.payload], state.time_values)[0].val : state.time;
           newState = {
             ...state,
             selected: setSelected(state.selected, action.payload),
-            focusedDayNum: parseDay(action.payload)
+            focusedDayNum: parseDay(action.payload),
+            time: newTime
           };
 
           newState.errors = "";
-
+          /*
           if (
-            JSON.stringify(newState.selected) === JSON.stringify(state.selected)
+            newState.selected.length === 0
           ) {
             // show deselect error
             newState.errors = [
@@ -123,7 +127,7 @@ export const StateProvider = ({ value, children }) => {
                 target: "Calendar-dates"
               }
             ];
-          }
+          }*/
         }
         break;
       case "SELECT_NEXT":
