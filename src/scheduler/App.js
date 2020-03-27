@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StateProvider, setIntialState, defaultState } from "./store";
-import { I18nProvider } from "./i18n";
+import { I18nProvider,I18nContext } from "./i18n";
 import { ErrorMessage } from "./ErrorMessage/ErrorMessage";
 import { Calendar } from "./Calendar/Calendar";
 import { DateTime } from "./DateTime/DateTime";
@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 
 export const App = () => {
   let options = {};
+  const { translate } = useContext(I18nContext);
 
   options = { init: setIntialState, ...window.schedulerOptions };
 
@@ -24,6 +25,7 @@ export const App = () => {
       <StateProvider value={providerState}>
         <DomEventHandler />
         <ErrorMessage />
+        <p class="messageTextStyle">{translate('select_date')}</p>
         <div className="schedule">
           <div>
             <Calendar />
@@ -31,7 +33,7 @@ export const App = () => {
           <DateTime />
           <SetDateTime />
         </div>
-        <div className="confirmationWrapper">
+        <div className="confirmationWrapper messageTextStyle">
           <Confirmation />
         </div>
       </StateProvider>
