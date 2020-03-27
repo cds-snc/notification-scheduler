@@ -86,6 +86,7 @@ export const StateProvider = ({ value, children }) => {
         newState = {
           ...state,
           _24hr: action.payload,
+          time_values: populateTimes(action.payload),
           updateMessage:
             action.payload === "off"
               ? "24 hr time selected"
