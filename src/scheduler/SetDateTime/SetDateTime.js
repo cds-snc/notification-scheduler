@@ -8,13 +8,13 @@ const setDateAndTimeValue = (val, hiddenValueRef=null) => {
 };
 
 export const SetDateTime = () => {
-  const { selected: selectedDate, time, hiddenValueRef } = useContext(store);
+  const { selected, time, hiddenValueRef } = useContext(store);
 
   if (!time) {
     setDateAndTimeValue("", hiddenValueRef);
     return null;
   }
 
-  setDateAndTimeValue(`${selectedDate[0]} ${time}`, hiddenValueRef);
+  setDateAndTimeValue(`${selected[0]} ${time}`, hiddenValueRef);
   return null;
 };
