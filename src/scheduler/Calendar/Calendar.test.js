@@ -52,7 +52,7 @@ test("Renders a calendar", async () => {
     expect(label).toEqual("Unavailable, Friday February 28 2020");
   });
 
-test("Renders a calendar on on a day with not time slot available, i.e. past 11 pm", async () => {
+test("Renders a calendar on on a day with no time slot available anymore past 11 pm", async () => {
     const today = dayjs("2020-02-29").hour(23).minute(1);
     const firstDay = dayjs("2020-03-01");
     const lateDayState = setIntialState({ today, firstDay });
