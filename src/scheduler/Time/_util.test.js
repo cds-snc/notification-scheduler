@@ -27,20 +27,20 @@ describe("Time utils", function() {
 
   const constructedToday = dayjsToday.year() + "-" + (dayjsToday.month() + 1) + "-" + dayjsToday.date()
 
-  test("Populate Times shows all 24h for a future date", async () => {
+test("Populate Times shows all 24h for a future date", async () => {
     expect(populateTimes(false)).toHaveLength(24)
   });
 
-  test("dateIsToday returns true when evaluating today", async () => {
+test("dateIsToday returns true when evaluating today", async () => {
     expect(dateIsToday([dayjsToday])).toBeTruthy;
   });
 
-  test("dateIsToday returns false when evaluating a different day", async () => {
+test("dateIsToday returns false when evaluating a different day", async () => {
     expect(dateIsToday(state.selected)).toBeFalsy;
   });
 
-  test("timeValuesToday culls times that have already passed", async () => {
-    // this test will fail between midnight and 1 AM
+test("timeValuesToday culls times that have already passed", async () => {
+    // this test will fail between midnight and 1 AM  
     const culled_time_values = timeValuesToday(constructedToday, state.time_values);
     expect(culled_time_values).not.toHaveLength(6);
   })
