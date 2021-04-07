@@ -18,7 +18,7 @@ describe("Calendar", function() {
   const providerState = setIntialState({ today, firstDay });
 
   // tests
-  test("Renders a calendar", async () => {
+test("Renders a calendar", async () => {
     const { getByLabelText, container, debug } = render(
       <I18nProvider value={i18nState}>
         <StateProvider value={providerState}>
@@ -52,7 +52,35 @@ describe("Calendar", function() {
     expect(label).toEqual("Unavailable, Friday February 28 2020");
   });
 
-  test("Handles key nav events", async () => {
+test("Renders a calendar on on a day with not time slot available, i.e. past 11 pm", async () => {
+    const today = dayjs("2020-02-29").hour(23).minute(1);
+    const firstDay = dayjs("2020-03-01");
+    const lateDayState = setIntialState({ today, firstDay });
+    const { getByLabelText, container, debug } = render(
+      <I18nProvider value={i18nState}>
+        <StateProvider value={lateDayState}>
+          <Calendar />
+        </StateProvider>
+      </I18nProvider>
+    );
+
+    // shows month name for the date provided
+    expect(container.querySelector(`.Nav--month`)).toHaveTextContent(
+      "March"
+    );
+
+    // renders a day
+    expect(container.querySelector(`[data-day="1"]`)).toHaveTextContent("1");
+
+    // marks day after available time period as unavailable
+    const label = container
+      .querySelector(`[data-day="6"]`)
+      .getAttribute("aria-label");
+
+    expect(label).toEqual("Unavailable, Friday March 06 2020");
+  });
+
+test("Handles key nav events", async () => {
     const { container, getByLabelText } = render(
       <I18nProvider value={i18nState}>
         <StateProvider value={providerState}>
