@@ -48,11 +48,9 @@ export const dateIsToday = (date) => {
   return today.isSame(dayjs(date[0]), 'day');
 };
 
-export const timeValuesToday = (selected, time_values) => {
-  const today = dayjs()
-  
+export const timeValuesToday = (now, selected, time_values) => {
   return time_values.filter(time => {
     const t = dayjs(selected + "T" + time.val);
-    return t.isAfter(today)
+    return t.isAfter(now)
   })
 }
