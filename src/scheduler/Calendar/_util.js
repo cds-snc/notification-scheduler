@@ -122,7 +122,7 @@ export const beforeFirstDayInMonth = state => {
 export const afterLastDayInMonth = state => {
   if (Number(state.focusedDayNum) === Number(state.lastDay)) {
     const newMonth = dayjs(state.date)
-      .add(1, "month")
+      .add(1, "day")
       .format("YYYY-MM-DD");
 
     if (dayjs(newMonth).isAfter(yearMonthDay(state.lastAvailableDate))) {

@@ -129,7 +129,7 @@ describe("Is before or after date", function() {
   });
 
   test("Is at start of month but before last available", async () => {
-    let date = "2020-02-01";
+    let date = "2020-02-29";
     let lastDay = getLastDay(date);
     let lastAvailableDate = dayjs("2020-03-31");
     let stateObj = {
